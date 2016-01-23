@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour 
 {
@@ -41,6 +40,11 @@ public class Player : MonoBehaviour
 
 	private void Update ()
 	{
+		if (GameManager.instance.isPaused)
+		{
+			return;
+		}
+
 		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
 		horizontal = Input.GetAxisRaw ("Horizontal");
 		
@@ -60,10 +64,10 @@ public class Player : MonoBehaviour
 		switch (other.tag)
 		{
 			case "Next":
-				LoadNextLevel();
+				GameManager.instance.LoadNextLevel();
 				break;
 			case "Death":
-				Restart();
+				GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
 				break;
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
@@ -74,6 +78,9 @@ public class Player : MonoBehaviour
 					GameManager.instance.ShowTooltipMessage(phrases[Random.Range(0, phrases.Length)]);
 					phraseUsed = true;
 				}
+				break;
+			case "Chest":
+				GameManager.instance.ShowSelectDialogPanel();
 				break;
 			default: 
 				
@@ -89,27 +96,11 @@ public class Player : MonoBehaviour
 				GameManager.instance.HideTooltipMessage();		
 				break;
 			case "Phrase":
-				GameManager.instance.HideTooltipMessage();		
+				GameManager.instance.HideTooltipMessage();
 				break;
 			default: 
 				
 				break;
-		}
-	}
-	
-	//Restart reloads the scene when called.
-	private void Restart()
-	{
-		//Load the last scene loaded, in this case Main, the only scene in the game.
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-	}
-
-	private void LoadNextLevel()
-	{
-		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-		if (currentSceneIndex < GameManager.instance.totalLevels)
-		{
-			SceneManager.LoadScene(currentSceneIndex + 1);
 		}
 	}
 
