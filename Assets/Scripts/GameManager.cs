@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
-
-		DontDestroyOnLoad(gameObject);
 	}
 
 	void OnLevelWasLoaded(int level)

@@ -25,8 +25,11 @@ public class Player : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
-    private BoxCollider2D boxCollider2D;
-    private Rigidbody2D rb2D;
+	private bool phraseUsed;
+
+	public string[] phrases = {
+		"I wanna poooo..."
+	};
 	
 	//Start overrides the Start function of MovingObject
 	void Start ()
@@ -34,8 +37,6 @@ public class Player : MonoBehaviour
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
 		targetPosition = transform.position;
-		boxCollider2D = GetComponent<BoxCollider2D>();
-		rb2D = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update ()
@@ -67,6 +68,13 @@ public class Player : MonoBehaviour
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
 				break;
+			case "Phrase":
+				if (!phraseUsed)
+				{
+					GameManager.instance.ShowTooltipMessage(phrases[Random.Range(0, phrases.Length)]);
+					phraseUsed = true;
+				}
+				break;
 			default: 
 				
 				break;
@@ -78,6 +86,9 @@ public class Player : MonoBehaviour
 		switch (other.tag)
 		{
 			case "Flower":
+				GameManager.instance.HideTooltipMessage();		
+				break;
+			case "Phrase":
 				GameManager.instance.HideTooltipMessage();		
 				break;
 			default: 
