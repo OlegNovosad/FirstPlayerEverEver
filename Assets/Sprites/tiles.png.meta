@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9b9a07693ab384034a51f7ec21457d30
-timeCreated: 1453582504
+timeCreated: 1453583260
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -62,9 +62,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 142
-        width: 33
-        height: 32
+        y: 440
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -72,19 +72,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 107
-        width: 32
-        height: 33
+        y: 334
+        width: 100
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: tiles_2
       rect:
         serializedVersion: 2
-        x: 34
-        y: 107
-        width: 32
-        height: 33
+        x: 105
+        y: 334
+        width: 100
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -92,19 +92,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 71
-        width: 32
-        height: 33
+        y: 223
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: tiles_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 71
-        width: 32
-        height: 33
+        x: 105
+        y: 223
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,19 +112,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 35
-        width: 32
-        height: 33
+        y: 111
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: tiles_6
       rect:
         serializedVersion: 2
-        x: 34
-        y: 35
-        width: 32
-        height: 33
+        x: 105
+        y: 111
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,18 +133,18 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: tiles_8
       rect:
         serializedVersion: 2
-        x: 34
+        x: 105
         y: 0
-        width: 32
-        height: 32
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
