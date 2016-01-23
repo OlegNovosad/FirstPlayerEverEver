@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour 
+{
 	public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 	public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 	public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
