@@ -21,7 +21,11 @@ public class Player : MonoBehaviour {
     public Ray movingRay;
     public Vector3 targetPosition;
 
+    float horizontal = 0;
+    float vertical = 0;
+
     private BoxCollider2D boxCollider2D;
+    private Rigidbody2D rb2D;
 	
 	//Start overrides the Start function of MovingObject
 	void Start ()
@@ -30,13 +34,11 @@ public class Player : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		targetPosition = transform.position;
 		boxCollider2D = GetComponent<BoxCollider2D>();
+		rb2D = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update ()
 	{
-		float horizontal = 0;  	//Used to store the horizontal move direction.
-		float vertical = 0;		//Used to store the vertical move direction.
-		
 		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
 		horizontal = Input.GetAxisRaw ("Horizontal");
 		
@@ -61,8 +63,7 @@ public class Player : MonoBehaviour {
 			case "Wall":
 				Debug.LogError("Wall");
 
-//		        var charMotor = col.GetComponent(CharacterMotor);
-//		        charMotor.SetVelocity(targetPosition * velBack);
+//				rb2D.AddForce(new Vector2(-this.transform.localScale.x * 1, 1) * 100 * Time.deltaTime * 0.5f, ForceMode2D.Impulse);
 				break;
 			default: 
 				
