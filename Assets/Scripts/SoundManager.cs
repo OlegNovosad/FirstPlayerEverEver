@@ -3,13 +3,12 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour 
 {
-	public AudioSource efxSource;					//Drag a reference to the audio source which will play the sound effects.
-	public AudioSource musicSource;					//Drag a reference to the audio source which will play the music.
+	private AudioSource efxSource;					// Drag a reference to the audio source which will play the sound effects.
+	private AudioSource playerSource;					// Drag a reference to the audio source which will play the sound effects.
 	public static SoundManager instance = null;		//Allows other scripts to call functions from SoundManager.				
 	public float lowPitchRange = .95f;				//The lowest a sound effect will be randomly pitched.
 	public float highPitchRange = 1.05f;			//The highest a sound effect will be randomly pitched.
-	
-	
+
 	void Awake ()
 	{
 		//Check if there is already an instance of SoundManager
@@ -24,22 +23,43 @@ public class SoundManager : MonoBehaviour
 		//Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
 		DontDestroyOnLoad (gameObject);
 	}
-	
+
+	void Start()
+	{
+		AudioSource[] sources = GetComponents<AudioSource>();
+		efxSource = sources[0];
+		playerSource = sources[1];
+	}
 	
 	//Used to play single sound clips.
 	public void PlaySingle(AudioClip clip)
 	{
+		if (efxSource.isPlaying)
+			return;
+
 		//Set the clip of our efxSource audio source to the clip passed in as a parameter.
 		efxSource.clip = clip;
 		
 		//Play the clip.
-		efxSource.Play ();
+		efxSource.Play();
 	}
-	
+
+	public void PlayPlayersSingle(AudioClip clip)
+	{
+		if (playerSource.isPlaying)
+			return;
+
+		playerSource.clip = clip;
+
+		playerSource.Play();
+	}
 	
 	//RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
 	public void RandomizeSfx (params AudioClip[] clips)
 	{
+		if (efxSource.isPlaying)
+			return;
+
 		//Generate a random number between 0 and the length of our array of clips passed in.
 		int randomIndex = Random.Range(0, clips.Length);
 		

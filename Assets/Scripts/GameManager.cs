@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
 	public int totalLevels = 4;
 
+	public AudioClip wallSound;
+
 	void Awake()
 	{
 		if (instance != null && instance != this)
@@ -32,15 +34,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
-	}
-
-	void OnLevelWasLoaded(int level)
-	{
-		GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
-		foreach (GameObject room in rooms)
-		{
-			currentRooms.Add(room.GetComponent<Room>());
-		}
 	}
 
 	public void ShowTooltipMessage(string message)
@@ -94,6 +87,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
+		SoundManager.instance.PlayPlayersSingle(wallSound);
 		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 		if (currentSceneIndex < GameManager.instance.totalLevels)
 		{

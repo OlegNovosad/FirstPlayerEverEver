@@ -4,12 +4,11 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
-	public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
-	public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
-	public AudioClip eatSound1;					//1 of 2 Audio clips to play when player collects a food object.
-	public AudioClip eatSound2;					//2 of 2 Audio clips to play when player collects a food object.
-	public AudioClip drinkSound1;				//1 of 2 Audio clips to play when player collects a soda object.
-	public AudioClip drinkSound2;				//2 of 2 Audio clips to play when player collects a soda object.
+	public AudioClip[] moveSounds;				//1 of 2 Audio clips to play when player moves.
+	public AudioClip mmmSound;
+	public AudioClip manGetTired;
+	public AudioClip deathSound;
+
 	public AudioClip gameOverSound;				//Audio clip to play when player dies.
 
 	[SerializeField] private float maxSpeed = 2f;                    // The fastest the player can travel in the x axis.
@@ -29,6 +28,8 @@ public class Player : MonoBehaviour
 	public string[] phrases = {
 		"I wanna poooo..."
 	};
+
+	private AudioClip randomMoveSound;
 	
 	//Start overrides the Start function of MovingObject
 	void Start ()
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
 		targetPosition = transform.position;
+
+		randomMoveSound = moveSounds[Random.Range(0, moveSounds.Length)];
 	}
 
 	private void Update ()
@@ -55,6 +58,7 @@ public class Player : MonoBehaviour
 		if (horizontal != 0 || vertical != 0)
 		{
 			Move(horizontal, vertical);
+			SoundManager.instance.RandomizeSfx(randomMoveSound);
 		}
 	}
 
@@ -67,14 +71,17 @@ public class Player : MonoBehaviour
 				GameManager.instance.LoadNextLevel();
 				break;
 			case "Death":
+				SoundManager.instance.PlayPlayersSingle(deathSound);
 				GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
 				break;
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
+				SoundManager.instance.PlayPlayersSingle(mmmSound);
 				break;
 			case "Phrase":
 				if (!phraseUsed)
 				{
+					SoundManager.instance.PlayPlayersSingle(manGetTired);
 					GameManager.instance.ShowTooltipMessage(phrases[Random.Range(0, phrases.Length)]);
 					phraseUsed = true;
 				}
