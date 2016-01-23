@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
 	List<Room> currentRooms = new List<Room>();
 	public static GameManager instance = null;
+
+	public GameObject tooltipPanel;
+	public Text tooltipPanelText;
+
+	public int totalLevels = 4;
 
 	void Awake()
 	{
@@ -19,18 +25,6 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	// Use this for initialization
-	void Start()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update()
-	{
-	
-	}
-
 	void OnLevelWasLoaded(int level)
 	{
 		GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
@@ -38,5 +32,17 @@ public class GameManager : MonoBehaviour
 		{
 			currentRooms.Add(room.GetComponent<Room>());
 		}
+	}
+
+	public void ShowTooltipMessage(string message)
+	{
+		tooltipPanel.SetActive(true);
+		tooltipPanelText.text = message;
+	}
+
+	public void HideTooltipMessage()
+	{
+		tooltipPanel.SetActive(false);
+		tooltipPanelText.text = "";
 	}
 }

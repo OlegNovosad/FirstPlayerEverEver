@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
 	}
 
 	//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
-	private void OnTriggerEnter2D (Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
 		switch (other.tag)
 		{
@@ -63,6 +63,22 @@ public class Player : MonoBehaviour
 				break;
 			case "Death":
 				Restart();
+				break;
+			case "Flower":
+				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
+				break;
+			default: 
+				
+				break;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		switch (other.tag)
+		{
+			case "Flower":
+				GameManager.instance.HideTooltipMessage();		
 				break;
 			default: 
 				
@@ -80,7 +96,7 @@ public class Player : MonoBehaviour
 	private void LoadNextLevel()
 	{
 		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-		if (SceneManager.GetAllScenes().Length > currentSceneIndex)
+		if (currentSceneIndex < GameManager.instance.totalLevels)
 		{
 			SceneManager.LoadScene(currentSceneIndex + 1);
 		}
