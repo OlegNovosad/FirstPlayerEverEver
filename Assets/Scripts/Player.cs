@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -58,12 +59,10 @@ public class Player : MonoBehaviour {
 		switch (other.tag)
 		{
 			case "Next":
-				Debug.LogError("Next room");
+				LoadNextLevel();
 				break;
-			case "Wall":
-				Debug.LogError("Wall");
-
-//				rb2D.AddForce(new Vector2(-this.transform.localScale.x * 1, 1) * 100 * Time.deltaTime * 0.5f, ForceMode2D.Impulse);
+			case "Death":
+				Restart();
 				break;
 			default: 
 				
@@ -72,10 +71,19 @@ public class Player : MonoBehaviour {
 	}
 	
 	//Restart reloads the scene when called.
-	private void Restart ()
+	private void Restart()
 	{
 		//Load the last scene loaded, in this case Main, the only scene in the game.
-		Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	private void LoadNextLevel()
+	{
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		if (SceneManager.GetAllScenes().Length > currentSceneIndex)
+		{
+			SceneManager.LoadScene(currentSceneIndex + 1);
+		}
 	}
 
     private void Awake()
