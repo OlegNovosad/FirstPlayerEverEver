@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 	void OnLevelWasLoaded(int level)
 	{
 		GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
-		foreach (Room room in rooms)
+		foreach (GameObject room in rooms)
 		{
-			currentRooms.Add(room);
+			currentRooms.Add(room.GetComponent<Room>());
 		}
 	}
 }
