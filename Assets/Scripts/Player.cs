@@ -87,7 +87,12 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Chest":
-				GameManager.instance.ShowSelectDialogPanel();
+				Chest chest = other.GetComponent<Chest>();
+
+				if (!chest.isUsed)
+				{
+					chest.OpenChest();
+				}
 				break;
 			default: 
 				

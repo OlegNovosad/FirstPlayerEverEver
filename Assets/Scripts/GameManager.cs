@@ -94,4 +94,21 @@ public class GameManager : MonoBehaviour
 			SceneManager.LoadScene(currentSceneIndex + 1);
 		}
 	}
+
+	public void SelectSkill(int choice)
+	{
+		switch (choice)
+		{
+			case 0:
+				PlayerManager.instance.selectedSkill = Constants.Skill.ThrowSpear;
+				break;
+			case 1:	
+				PlayerManager.instance.selectedSkill = Constants.Skill.PullOutSpear;
+				break;
+			default: 
+				PlayerManager.instance.selectedSkill = Constants.Skill.None;
+				break;
+		}
+		HideSelectDialogPanel();
+	}
 }
