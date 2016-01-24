@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0be44391f0e4b45a184e933accf25ed7
-timeCreated: 1453599881
+timeCreated: 1453602400
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -57,31 +57,35 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
+      - - {x: -57, y: 60}
+        - {x: -60, y: 58}
+        - {x: -60, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: 54}
+        - {x: 54, y: 60}
     - name: skillicons_1
       rect:
         serializedVersion: 2
-        x: 40
+        x: 150
         y: 0
-        width: 32
-        height: 32
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
+      - - {x: -57, y: 60}
+        - {x: -60, y: 58}
+        - {x: -60, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: 54}
+        - {x: 54, y: 60}
     outline: []
   spritePackingTag: 
   userData: 
