@@ -115,8 +115,9 @@ public class GameManager : MonoBehaviour
 		HideSelectDialogPanel();
 	}
 
-	public void GameOver()
+	public IEnumerator GameOver()
 	{
+		yield return new WaitForSeconds(0.2f);
 		SoundManager.instance.PlayPlayersSingle(deathSound);
 		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
 	}

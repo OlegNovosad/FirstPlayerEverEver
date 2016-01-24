@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 	public AudioClip mmmSound;
 	public AudioClip manGetTired;
 
-	public AudioClip gameOverSound;				//Audio clip to play when player dies.
+	public Sprite spikeOff;
+	public Sprite spikeOn;
 
 	[SerializeField] private float maxSpeed = 2f;                    // The fastest the player can travel in the x axis.
 
@@ -70,7 +71,8 @@ public class Player : MonoBehaviour
 				GameManager.instance.LoadNextLevel();
 				break;
 			case "Death":
-				GameManager.instance.GameOver();
+				other.gameObject.GetComponent<SpriteRenderer>().sprite = spikeOn;
+				StartCoroutine(GameManager.instance.GameOver());
 				break;
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
