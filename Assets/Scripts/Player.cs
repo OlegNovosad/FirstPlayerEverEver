@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     float vertical = 0;
 
 	public GameObject level2Wall;
+	public GameObject level4Wall;
+	public GameObject garlic;
 
 	public float flowersNumber = Constants.FlowersCount; // magic number
 
@@ -33,6 +35,9 @@ public class Player : MonoBehaviour
 	public string[] phrases = {
 		"I wanna poooo..."
 	};
+
+	private bool hasGarlic = false;
+	private bool hasSpear = false;
 
 	private AudioClip randomMoveSound;
 	
@@ -146,22 +151,62 @@ public class Player : MonoBehaviour
 					chest.OpenChest();
 				}
 				break;
+			case "Lock":
+				if (PlayerManager.instance.hasKey) {
+					GameObject.Find ("Lock").SetActive (false);
+					GameManager.instance.ShowModalDialogPanel ("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
+					GameObject.Find ("LevelHiddenPassageWall1").SetActive (false);
+					GameObject.Find ("LevelHiddenPassageWall2").SetActive (false);
+					GameObject.Find ("/Canvas/HUD/KeyImage").SetActive (false);
+				} else {
+					GameManager.instance.ShowTooltipMessage ("Mmmm? Me don't know what this is.");
+				}
+			break;
+			case "Bat":
+				PlayerManager.instance.Damage(3);
 
-		case "Lock":
-			if (PlayerManager.instance.hasKey) {
-				GameObject.Find ("Lock").SetActive (false);
-				GameManager.instance.ShowModalDialogPanel ("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
-				GameObject.Find ("LevelHiddenPassageWall1").SetActive (false);
-				GameObject.Find ("LevelHiddenPassageWall2").SetActive (false);
-				GameObject.Find ("/Canvas/HUD/KeyImage").SetActive (false);
-			} else {
-				GameManager.instance.ShowTooltipMessage ("Mmmm? Me don't know what this is.");
-			}
+				if (hasSpear)
+				{
+				GameManager.instance.DamageBat(10);
+				}
+				else
+				{
+					GameManager.instance.DamageBat(5);
+				}
+
+				StartCoroutine(RestartTrigger(other));
+				break;
+			case "Vampire":
+				if (hasGarlic)
+				{
+					Destroy(GameManager.instance.vampire);
+					Destroy(level4Wall);
+				}
+				else
+				{
+					PlayerManager.instance.Damage(50);
+				}
+				break;
+			case "Garlic":
+				if (GameManager.instance.vampire.GetComponent<Vampire>().turn)
+				{
+					Destroy(garlic);
+					hasGarlic = true;
+					SoundManager.instance.PlayPlayersSingle(mmmSound);
+				}
 				break;
 			default: 
 				
 				break;
 		}
+	}
+
+	IEnumerator RestartTrigger(Collider2D other)
+	{
+		yield return new WaitForSeconds(0.2f);
+		other.isTrigger = false;
+		yield return new WaitForSeconds(0.2f);
+		other.isTrigger = true;
 	}
 
 	private void OnTriggerExit2D(Collider2D other)

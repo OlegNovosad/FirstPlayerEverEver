@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
 	List<Room> currentRooms = new List<Room>();
 	public static GameManager instance = null;
+	public GameObject bat;
+	public GameObject vampire;
 
 	public GameObject tooltipPanel;
 	public Text tooltipPanelText;
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
 	private float timeLeft = 42; // equal to hp number
 
 	public int chestOpened = 0;
+	public int batHP = 30;
+	public int vampireHP = 9999;
 
 	public Constants.QuestState questState = Constants.QuestState.None;
 
@@ -55,12 +59,36 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Damages the bat.
+	/// </summary>
+	/// <param name="value">Value.</param>
+	public void DamageBat(int value)
+	{
+		batHP -= value;
+
+		if (batHP <= 0)
+		{
+			Destroy(bat);
+			vampire.GetComponent<SpriteRenderer>().enabled = true;
+			ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
+			vampire.GetComponent<Vampire>().turn = true;
+		}
+	}
+
+	/// <summary>
+	/// Shows the tooltip message.
+	/// </summary>
+	/// <param name="message">Message.</param>
 	public void ShowTooltipMessage(string message)
 	{
 		tooltipPanel.SetActive(true);
 		tooltipPanelText.text = message;
 	}
 
+	/// <summary>
+	/// Hides the tooltip message.
+	/// </summary>
 	public void HideTooltipMessage()
 	{
 		tooltipPanel.SetActive(false);
