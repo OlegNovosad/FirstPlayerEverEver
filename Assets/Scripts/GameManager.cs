@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 	public int batHP = 30;
 	public int vampireHP = 9999;
 
+	public bool isFirstLevel;
+
+
 	public Constants.QuestState questState = Constants.QuestState.None;
 
 	void Awake()
@@ -47,6 +50,10 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
+		if (SceneManager.GetActiveScene ().name == "Level1") {
+			isFirstLevel = true;
+			ShowModalDialogPanel ("Hello stranger \nare \nyou ready to play\nfirst game ever... ever?!", "What?", false, true);
+		}
 	}
 
 	void Update()
@@ -107,11 +114,13 @@ public class GameManager : MonoBehaviour
 		isPaused = false;
 	}
 
-	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false)
+	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false, bool firstLevel = false)
 	{
 		modalDialogPanel.SetActive(true);
 		modalDialogMessageText.text = message;
 		modalDialogButtonText.text = buttonText;
+
+
 
 		if (finishGame)
 		{
@@ -119,19 +128,20 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel());
+			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel(firstLevel));
 		}
 
 		isPaused = true;
 	}
 
-	public void HideModalDialogPanel()
+	public void HideModalDialogPanel(bool firstLevel = false)
 	{
 		modalDialogPanel.SetActive(false);
 		modalDialogMessageText.text = "";
 		modalDialogButtonText.text = "";
 		modalDialogButton.onClick.AddListener(null);
 		isPaused = false;
+
 	}
 
 	//Restart reloads the scene when called.

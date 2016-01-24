@@ -106,33 +106,44 @@ public class Player : MonoBehaviour
 
 				GameManager.instance.StartPoisoning();
 				break;
-			case "Grandpa":
-				SoundManager.instance.PlayPlayersSingle(grandpaSound);
-				if (GameManager.instance.questState == Constants.QuestState.Done)
-				{
-					GameManager.instance.ShowModalDialogPanel("Well done. You can continue your journey.", "Ok");
-					Destroy(level2Wall);
+		case "Grandpa":
+			SoundManager.instance.PlayPlayersSingle (grandpaSound);
+			if (GameManager.instance.isFirstLevel) {
+				GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
+				if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) {
+					GameObject.Find ("/Canvas/GameNameText").SetActive (false);
+				}
+				if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) {
+					GameObject.Find ("wizard").SetActive (false);
+				}
+			}
+//			else if (GameManager.instance.isLastLevel) {
+//			}
+			else {
+				if (GameManager.instance.questState == Constants.QuestState.Done) {
+					GameManager.instance.ShowModalDialogPanel ("Well done. You can continue your journey.", "Ok");
+					Destroy (level2Wall);
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.None)
-				{
+				if (GameManager.instance.questState == Constants.QuestState.None) {
 					GameManager.instance.questState = Constants.QuestState.Started;
-					GameManager.instance.ShowModalDialogPanel("Your quests start here. Collect all flowers before you die. MUHAHHAHA.", "Ok");
+					GameManager.instance.ShowModalDialogPanel ("Your quests start here. Collect all flowers before you die. MUHAHHAHA.", "Ok");
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.Started)
-				{
-					GameManager.instance.ShowModalDialogPanel("Go do quest, you lazy boy.", "Ok");
+				if (GameManager.instance.questState == Constants.QuestState.Started) {
+					GameManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.InProgress)
-				{
-					GameManager.instance.ShowModalDialogPanel("Mmm...i can smell it.", "Ok");
+				if (GameManager.instance.questState == Constants.QuestState.InProgress) {
+					GameManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
 					return;
 				}
+			}
+
+
 
 				break;
 			case "Phrase":
@@ -194,6 +205,11 @@ public class Player : MonoBehaviour
 					hasGarlic = true;
 					SoundManager.instance.PlayPlayersSingle(mmmSound);
 				}
+				break;
+
+		case "Lvl1_dialog1":
+			GameManager.instance.ShowModalDialogPanel ("Just explore the cave, young hero in this first game ever. Ever...", "mmm...");
+			GameObject.Find ("/Level/Wall (4)/Floor1 (1)/messageObj");
 				break;
 			default: 
 				
