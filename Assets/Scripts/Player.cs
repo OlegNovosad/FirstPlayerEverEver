@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
 
 	private bool phraseUsed;
 
+	public Sprite cipo4kaVamp;
+	public Sprite cipo4ka;
+
 	public string[] phrases = {
 		"I wanna poooo..."
 	};
@@ -207,9 +210,9 @@ public class Player : MonoBehaviour
 				}
 				break;
 
-		case "Lvl1_dialog1":
-			GameManager.instance.ShowModalDialogPanel ("Just explore the cave, young hero in this first game ever. Ever...", "mmm...");
-			GameObject.Find ("/Level/Wall (4)/Floor1 (1)/messageObj");
+		case "Cipo4ka":
+			GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
+			GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
 				break;
 			default: 
 				
