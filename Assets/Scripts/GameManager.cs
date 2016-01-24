@@ -120,8 +120,6 @@ public class GameManager : MonoBehaviour
 		modalDialogMessageText.text = message;
 		modalDialogButtonText.text = buttonText;
 
-
-
 		if (finishGame)
 		{
 			modalDialogButton.onClick.AddListener(() => Restart());
@@ -136,12 +134,11 @@ public class GameManager : MonoBehaviour
 
 	public void HideModalDialogPanel(bool firstLevel = false)
 	{
+		modalDialogButton.onClick.RemoveAllListeners();
 		modalDialogPanel.SetActive(false);
 		modalDialogMessageText.text = "";
 		modalDialogButtonText.text = "";
-		modalDialogButton.onClick.AddListener(null);
 		isPaused = false;
-
 	}
 
 	//Restart reloads the scene when called.
