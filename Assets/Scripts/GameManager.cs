@@ -194,4 +194,9 @@ public class GameManager : MonoBehaviour
 		SoundManager.instance.PlayPlayersSingle(deathSound);
 		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart", true);
 	}
+
+	public void StartFromTheBeginning()
+	{
+		SceneManager.LoadScene(0);
+	}
 }

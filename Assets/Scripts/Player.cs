@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 
 	public Sprite cipo4kaVamp;
 	public Sprite cipo4ka;
+	public Sprite wizardCipo4ka;
+	public Sprite wizard;
 
 	public string[] phrases = {
 		"I wanna poooo..."
@@ -89,6 +91,10 @@ public class Player : MonoBehaviour
 				break;
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
+				SoundManager.instance.PlayPlayersSingle(mmmSound);
+				break;
+			case "Fire":
+				GameManager.instance.ShowTooltipMessage(Constants.FireMessage);
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
 				break;
 			case "QuestFlower":
@@ -181,7 +187,7 @@ public class Player : MonoBehaviour
 
 				if (hasSpear)
 				{
-				GameManager.instance.DamageBat(10);
+					GameManager.instance.DamageBat(10);
 				}
 				else
 				{
@@ -210,13 +216,18 @@ public class Player : MonoBehaviour
 				}
 				break;
 
-		case "Cipo4ka":
-			GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
-			GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
+			case "Cipo4ka":
+				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
+				GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
 				break;
-			default: 
-				
+			case "GrandpaFinal":
+				GameManager.instance.ShowModalDialogPanel ("Great choice, and here is your reward!", "Aww! My wife!");
+				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = wizardCipo4ka;
 				break;
+			case "Exit":
+				GameManager.instance.StartFromTheBeginning();
+				break;
+			default: break;
 		}
 	}
 
@@ -238,9 +249,10 @@ public class Player : MonoBehaviour
 			case "Phrase":
 				GameManager.instance.HideTooltipMessage();
 				break;
-			default: 
-				
+			case "Fire":
+				GameManager.instance.HideTooltipMessage();
 				break;
+			default: break;
 		}
 	}
 
