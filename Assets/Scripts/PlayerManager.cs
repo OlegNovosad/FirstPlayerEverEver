@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour 
 {
 	public static PlayerManager instance = null;
 
 	public Constants.Skill selectedSkill = Constants.Skill.None;
+	public int playerHealths = Constants.MaxPlayerHealth;
+
+	public Scrollbar healthbar;
+	public Text healthAmount;
 
 	void Awake()
 	{
@@ -15,19 +20,21 @@ public class PlayerManager : MonoBehaviour
 		}
 
 		instance = this;
-
-		DontDestroyOnLoad(gameObject);
 	}
 
-	// Use this for initialization
-	void Start()
+	public void Damage(int value)
 	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update()
-	{
-	
+		playerHealths -= value;
+		healthbar.size = playerHealths / 42f;
+
+		if (playerHealths > 0)
+		{
+			healthAmount.text = playerHealths.ToString();
+		}
+		else
+		{
+			healthAmount.text = "0";
+			GameManager.instance.GameOver();
+		}
 	}
 }

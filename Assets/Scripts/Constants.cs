@@ -10,4 +10,6 @@ public class Constants
 		ThrowSpear,
 		PullOutSpear
 	}
+
+	public const int MaxPlayerHealth = 42;
 }

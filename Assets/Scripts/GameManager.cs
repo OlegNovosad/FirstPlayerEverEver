@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 	public int totalLevels = 4;
 
 	public AudioClip wallSound;
+	public AudioClip deathSound;
 
 	void Awake()
 	{
@@ -83,6 +84,8 @@ public class GameManager : MonoBehaviour
 	{
 		//Load the last scene loaded, in this case Main, the only scene in the game.
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		PlayerManager.instance.playerHealths = Constants.MaxPlayerHealth;
+		PlayerManager.instance.healthbar.size = 1;
 	}
 
 	public void LoadNextLevel()
@@ -110,5 +113,11 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 		HideSelectDialogPanel();
+	}
+
+	public void GameOver()
+	{
+		SoundManager.instance.PlayPlayersSingle(deathSound);
+		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
 	}
 }

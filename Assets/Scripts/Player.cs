@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 	public AudioClip[] moveSounds;				//1 of 2 Audio clips to play when player moves.
 	public AudioClip mmmSound;
 	public AudioClip manGetTired;
-	public AudioClip deathSound;
 
 	public AudioClip gameOverSound;				//Audio clip to play when player dies.
 
@@ -71,8 +70,7 @@ public class Player : MonoBehaviour
 				GameManager.instance.LoadNextLevel();
 				break;
 			case "Death":
-				SoundManager.instance.PlayPlayersSingle(deathSound);
-				GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
+				GameManager.instance.GameOver();
 				break;
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
