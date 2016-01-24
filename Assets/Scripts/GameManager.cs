@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 	public AudioClip wallSound;
 	public AudioClip deathSound;
 	public AudioClip hurtSound;
+	public AudioClip batSqueak;
+	public AudioClip intovampire;
 
 	private bool isPoisoning = false;
 	private float timeLeft = 42; // equal to hp number
@@ -73,11 +75,14 @@ public class GameManager : MonoBehaviour
 	public void DamageBat(int value)
 	{
 		batHP -= value;
+		SoundManager.instance.PlayPlayersSingle(batSqueak);
 
 		if (batHP <= 0)
 		{
 			Destroy(bat);
+			SoundManager.instance.PlayPlayersSingle(intovampire);
 			vampire.GetComponent<SpriteRenderer>().enabled = true;
+			vampire.GetComponent<BoxCollider2D>().isTrigger = true;
 			ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
 			vampire.GetComponent<Vampire>().turn = true;
 		}

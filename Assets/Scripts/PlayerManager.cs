@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour
 		else
 		{
 			healthAmount.text = "0";
-			GameManager.instance.GameOver();
+			StartCoroutine(GameManager.instance.GameOver());
 		}
 	}
 
