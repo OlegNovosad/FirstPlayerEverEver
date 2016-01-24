@@ -3,10 +3,11 @@ using System.Collections;
 
 public class Player : MonoBehaviour 
 {
-	public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 	public AudioClip[] moveSounds;				//1 of 2 Audio clips to play when player moves.
 	public AudioClip mmmSound;
 	public AudioClip manGetTired;
+	public AudioClip collectSound;
+	public AudioClip grandpaSound;
 
 	public Sprite spikeOff;
 	public Sprite spikeOn;
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour
 
     float horizontal = 0;
     float vertical = 0;
+
+	public GameObject level2Wall;
+
+	public float flowersNumber = Constants.FlowersCount; // magic number
 
 	private bool phraseUsed;
 
@@ -77,6 +82,53 @@ public class Player : MonoBehaviour
 			case "Flower":
 				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
+				break;
+			case "QuestFlower":
+				flowersNumber--;
+				Destroy(other.gameObject);
+				SoundManager.instance.PlayPlayersSingle(collectSound);
+
+				if (flowersNumber <= 0)
+				{
+					GameManager.instance.questState = Constants.QuestState.Done;
+				}
+				break;
+			case "QuestRoom":
+				if (GameManager.instance.questState != Constants.QuestState.Done)
+				{
+					GameManager.instance.questState = Constants.QuestState.InProgress;
+				}
+
+				GameManager.instance.StartPoisoning();
+				break;
+			case "Grandpa":
+				SoundManager.instance.PlayPlayersSingle(grandpaSound);
+				if (GameManager.instance.questState == Constants.QuestState.Done)
+				{
+					GameManager.instance.ShowModalDialogPanel("Well done. You can continue your journey.", "Ok");
+					Destroy(level2Wall);
+					return;
+				}
+
+				if (GameManager.instance.questState == Constants.QuestState.None)
+				{
+					GameManager.instance.questState = Constants.QuestState.Started;
+					GameManager.instance.ShowModalDialogPanel("Your quests start here. Collect all flowers before you die. MUHAHHAHA.", "Ok");
+					return;
+				}
+
+				if (GameManager.instance.questState == Constants.QuestState.Started)
+				{
+					GameManager.instance.ShowModalDialogPanel("Go do quest, you lazy boy.", "Ok");
+					return;
+				}
+
+				if (GameManager.instance.questState == Constants.QuestState.InProgress)
+				{
+					GameManager.instance.ShowModalDialogPanel("Mmm...i can smell it.", "Ok");
+					return;
+				}
+
 				break;
 			case "Phrase":
 				if (!phraseUsed)

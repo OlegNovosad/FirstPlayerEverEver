@@ -11,5 +11,14 @@ public class Constants
 		PullOutSpear
 	}
 
+	public enum QuestState
+	{
+		None,
+		Started,
+		InProgress,
+		Done
+	}
+
 	public const int MaxPlayerHealth = 42;
+	public const int FlowersCount = 17;
 }

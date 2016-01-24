@@ -26,6 +26,12 @@ public class GameManager : MonoBehaviour
 
 	public AudioClip wallSound;
 	public AudioClip deathSound;
+	public AudioClip hurtSound;
+
+	private bool isPoisoning = false;
+	private float timeLeft = 42; // equal to hp number
+
+	public Constants.QuestState questState = Constants.QuestState.None;
 
 	void Awake()
 	{
@@ -35,6 +41,16 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
+	}
+
+	void Update()
+	{
+		if (isPoisoning && !isPaused)
+		{
+			timeLeft -= Time.deltaTime;
+			PlayerManager.instance.Damage(PlayerManager.instance.playerHealths - (int) timeLeft);
+			SoundManager.instance.PlayPlayersSingle(hurtSound);
+		}
 	}
 
 	public void ShowTooltipMessage(string message)
@@ -61,12 +77,21 @@ public class GameManager : MonoBehaviour
 		isPaused = false;
 	}
 
-	public void ShowModalDialogPanel(string message, string buttonText)
+	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false)
 	{
 		modalDialogPanel.SetActive(true);
 		modalDialogMessageText.text = message;
 		modalDialogButtonText.text = buttonText;
-		modalDialogButton.onClick.AddListener(() => Restart());
+
+		if (finishGame)
+		{
+			modalDialogButton.onClick.AddListener(() => Restart());
+		}
+		else
+		{
+			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel());
+		}
+
 		isPaused = true;
 	}
 
@@ -115,10 +140,16 @@ public class GameManager : MonoBehaviour
 		HideSelectDialogPanel();
 	}
 
+	public void StartPoisoning()
+	{
+		screenOverlay.SetActive(!screenOverlay.activeSelf);
+		isPoisoning = !isPoisoning;
+	}
+
 	public IEnumerator GameOver()
 	{
 		yield return new WaitForSeconds(0.2f);
 		SoundManager.instance.PlayPlayersSingle(deathSound);
-		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart");
+		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart", true);
 	}
 }
