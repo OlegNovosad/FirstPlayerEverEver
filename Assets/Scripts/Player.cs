@@ -227,6 +227,10 @@ public class Player : MonoBehaviour
 			case "Exit":
 				GameManager.instance.StartFromTheBeginning();
 				break;
+			case "Sign":
+				GameManager.instance.ShowTooltipMessage(Constants.SignMessage);
+				SoundManager.instance.PlayPlayersSingle(mmmSound);
+				break;
 			default: break;
 		}
 	}
@@ -244,12 +248,9 @@ public class Player : MonoBehaviour
 		switch (other.tag)
 		{
 			case "Flower":
-				GameManager.instance.HideTooltipMessage();		
-				break;
 			case "Phrase":
-				GameManager.instance.HideTooltipMessage();
-				break;
 			case "Fire":
+			case "Sign":
 				GameManager.instance.HideTooltipMessage();
 				break;
 			default: break;

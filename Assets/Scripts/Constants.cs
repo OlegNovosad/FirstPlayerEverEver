@@ -4,6 +4,7 @@ public class Constants
 {
 	public const string FlowerMessage = "Just a flower";
 	public const string FireMessage = "Its hot. Like me.";
+	public const string SignMessage = "Hmm...";
 
 	public enum Skill
 	{
