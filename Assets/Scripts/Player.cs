@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public AudioClip manGetTired;
 	public AudioClip collectSound;
 	public AudioClip grandpaSound;
+	public AudioClip cipo4kaSound;
 
 	public Sprite spikeOff;
 	public Sprite spikeOn;
@@ -217,6 +218,7 @@ public class Player : MonoBehaviour
 				break;
 
 			case "Cipo4ka":
+				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
 				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
 				GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
 				break;

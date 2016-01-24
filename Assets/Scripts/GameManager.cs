@@ -197,6 +197,11 @@ public class GameManager : MonoBehaviour
 
 	public void StartFromTheBeginning()
 	{
+		SceneManager.LoadScene(5);
+	}
+
+	public void StartAgain()
+	{
 		SceneManager.LoadScene(0);
 	}
 }
