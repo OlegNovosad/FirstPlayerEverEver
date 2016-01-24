@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
 	public Button throwSpearButton;
 	public Button pullOutSpearButton;
 
+	public bool hasKey;
+
 	void Awake()
 	{
 		if (instance != null && instance != this)
@@ -26,6 +28,7 @@ public class PlayerManager : MonoBehaviour
 		}
 
 		instance = this;
+		hasKey = false;
 	}
 
 	void Update()

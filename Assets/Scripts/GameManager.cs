@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 	private bool isPoisoning = false;
 	private float timeLeft = 42; // equal to hp number
 
+	public int chestOpened = 0;
+
 	public Constants.QuestState questState = Constants.QuestState.None;
 
 	void Awake()

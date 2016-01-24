@@ -146,6 +146,18 @@ public class Player : MonoBehaviour
 					chest.OpenChest();
 				}
 				break;
+
+		case "Lock":
+			if (PlayerManager.instance.hasKey) {
+				GameObject.Find ("Lock").SetActive (false);
+				GameManager.instance.ShowModalDialogPanel ("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
+				GameObject.Find ("LevelHiddenPassageWall1").SetActive (false);
+				GameObject.Find ("LevelHiddenPassageWall2").SetActive (false);
+				GameObject.Find ("/Canvas/HUD/KeyImage").SetActive (false);
+			} else {
+				GameManager.instance.ShowTooltipMessage ("Mmmm? Me don't know what this is.");
+			}
+				break;
 			default: 
 				
 				break;
