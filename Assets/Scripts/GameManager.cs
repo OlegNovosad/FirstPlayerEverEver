@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
-	List<Room> currentRooms = new List<Room>();
 	public static GameManager instance = null;
 	public GameObject bat;
 	public GameObject vampire;
