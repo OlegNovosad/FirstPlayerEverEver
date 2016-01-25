@@ -120,8 +120,8 @@ public class Player : MonoBehaviour
 			SoundManager.instance.PlayPlayersSingle (grandpaSound);
 			if (GameManager.instance.isFirstLevel) {
 				GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-				if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) {
-					GameObject.Find ("/Canvas/GameNameText").SetActive (false);
+				if (GameObject.Find ("/Canvas/HUD/GameNameText") && GameObject.Find ("/Canvas/HUD/GameNameText").activeSelf) {
+					GameObject.Find ("/Canvas/HUD/GameNameText").SetActive (false);
 				}
 				if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) {
 					GameObject.Find ("wizard").SetActive (false);
@@ -131,14 +131,14 @@ public class Player : MonoBehaviour
 //			}
 			else {
 				if (GameManager.instance.questState == Constants.QuestState.Done) {
-					GameManager.instance.ShowModalDialogPanel ("Well done. You can continue your journey.", "Ok");
+					GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
 					Destroy (level2Wall);
 					return;
 				}
 
 				if (GameManager.instance.questState == Constants.QuestState.None) {
 					GameManager.instance.questState = Constants.QuestState.Started;
-					GameManager.instance.ShowModalDialogPanel ("Your quests start here. Collect all flowers before you die. MUHAHHAHA.", "Ok");
+					GameManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
 					return;
 				}
 
@@ -219,15 +219,19 @@ public class Player : MonoBehaviour
 
 			case "Cipo4ka":
 				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
-				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
+				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?", true);
 				GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
 				break;
 			case "GrandpaFinal":
-				GameManager.instance.ShowModalDialogPanel ("Great choice, and here is your reward!", "Aww! My wife!");
+				GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
 				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = wizardCipo4ka;
 				break;
 			case "Exit":
 				GameManager.instance.StartFromTheBeginning();
+				break;
+			case "Tablet":
+				Tablet tablet = other.GetComponent<Tablet> ();
+				GameManager.instance.ShowTooltipMessage (tablet.setTabletMessage ());
 				break;
 			default: break;
 		}
@@ -252,6 +256,12 @@ public class Player : MonoBehaviour
 				GameManager.instance.HideTooltipMessage();
 				break;
 			case "Fire":
+				GameManager.instance.HideTooltipMessage();
+				break;
+			case "Lock":
+				GameManager.instance.HideTooltipMessage();
+				break;
+			case "Tablet":
 				GameManager.instance.HideTooltipMessage();
 				break;
 			default: break;
