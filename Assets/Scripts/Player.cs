@@ -25,8 +25,9 @@ public class Player : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
-	public GameObject level2Wall;
-	public GameObject level4Wall;
+	public GameObject [] level2Walls;
+	public GameObject [] level3Walls;
+	public GameObject [] level4Walls;
 	public GameObject garlic;
 
 	public float flowersNumber = Constants.FlowersCount; // magic number
@@ -143,7 +144,9 @@ public class Player : MonoBehaviour
 				if (GameManager.instance.questState == Constants.QuestState.Done)
 				{
 					GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
-					Destroy (level2Wall);
+					for (int i = 0; i < level2Walls.Length; i++) {
+						Destroy (level2Walls[i]);
+					}
 					return;
 				}
 
@@ -188,8 +191,9 @@ public class Player : MonoBehaviour
 				{
 					GameObject.Find("Lock").SetActive(false);
 					GameManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
-					GameObject.Find("LevelHiddenPassageWall1").SetActive(false);
-					GameObject.Find("LevelHiddenPassageWall2").SetActive(false);
+					for (int i = 0; i < level3Walls.Length; i++) {
+						Destroy (level3Walls[i]);
+					}
 					GameObject.Find("/Canvas/HUD/KeyImage").SetActive(false);
 				} 
 				else 
@@ -218,7 +222,10 @@ public class Player : MonoBehaviour
 				if (hasGarlic)
 				{
 					Destroy(GameManager.instance.vampire);
-					Destroy(level4Wall);
+				for (int i = 0; i < level4Walls.Length; i++) {
+					Destroy (level4Walls[i]);
+				}
+					
 				}
 				else
 				{

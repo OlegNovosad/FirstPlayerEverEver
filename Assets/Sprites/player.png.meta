@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6dc91bf8f1a2b4f0299bc8aa5d1b334e
-timeCreated: 1453624421
+timeCreated: 1453918732
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,70 +58,81 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 54
-        height: 89
+        y: 3
+        width: 107
+        height: 177
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -27, y: 44.5}
-        - {x: -27, y: -44.5}
-        - {x: 27, y: -44.5}
-        - {x: 27, y: 41.5}
-        - {x: 26, y: 44.5}
+      - - {x: -49.5, y: 88.5}
+        - {x: -53.5, y: 85.5}
+        - {x: -53.5, y: -16.5}
+        - {x: -50.5, y: -56.5}
+        - {x: -29.5, y: -88.5}
+        - {x: 38.5, y: -88.5}
+        - {x: 53.5, y: -84.5}
+        - {x: 53.5, y: -20.5}
+        - {x: 48.5, y: 33.5}
+        - {x: 35.5, y: 88.5}
     - name: player_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 2
-        width: 52
-        height: 88
+        x: 120
+        y: 4
+        width: 102
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -26, y: 44}
-        - {x: -26, y: -30}
-        - {x: -23, y: -44}
-        - {x: 25, y: -44}
-        - {x: 26, y: -43}
-        - {x: 26, y: 30}
-        - {x: 24, y: 44}
+      - - {x: 42, y: 88}
+        - {x: -49, y: 88}
+        - {x: -51, y: 81}
+        - {x: -51, y: -36}
+        - {x: -38, y: -88}
+        - {x: 51, y: -88}
+        - {x: 51, y: 79}
+        - {x: 49, y: 87}
     - name: player_2
       rect:
         serializedVersion: 2
-        x: 119
+        x: 240
         y: 0
-        width: 56
-        height: 90
+        width: 110
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -28, y: 45}
-        - {x: -28, y: -45}
-        - {x: 21, y: -45}
-        - {x: 28, y: -40}
-        - {x: 28, y: 23}
-        - {x: 26, y: 45}
+      - - {x: 42, y: 90}
+        - {x: -55, y: 90}
+        - {x: -55, y: -35}
+        - {x: -44, y: -84}
+        - {x: -26, y: -90}
+        - {x: 31, y: -90}
+        - {x: 55, y: -73}
+        - {x: 55, y: -23}
+        - {x: 46, y: 89}
     - name: player_3
       rect:
         serializedVersion: 2
-        x: 179
+        x: 360
         y: 0
-        width: 54
-        height: 90
+        width: 107
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -27, y: 45}
-        - {x: -27, y: -30}
-        - {x: -14, y: -45}
-        - {x: 19, y: -45}
-        - {x: 27, y: -44}
-        - {x: 27, y: 45}
+      - - {x: 37.5, y: 90}
+        - {x: -53.5, y: 90}
+        - {x: -53.5, y: -35}
+        - {x: -44.5, y: -87}
+        - {x: -31.5, y: -90}
+        - {x: 53.5, y: -90}
+        - {x: 53.5, y: 64}
+        - {x: 46.5, y: 89}
     outline: []
   spritePackingTag: 
   userData: 

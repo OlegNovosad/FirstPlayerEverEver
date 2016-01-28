@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9b9a07693ab384034a51f7ec21457d30
-timeCreated: 1453583260
+timeCreated: 1453919681
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -26,7 +26,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -46,11 +46,12 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -62,92 +63,138 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 440
-        width: 100
-        height: 100
+        y: 894
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 334
-        width: 100
-        height: 101
+        x: 13
+        y: 669
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_2
       rect:
         serializedVersion: 2
-        x: 105
-        y: 334
-        width: 100
-        height: 101
+        x: 223
+        y: 669
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 223
-        width: 100
-        height: 100
+        x: 13
+        y: 446
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_4
       rect:
         serializedVersion: 2
-        x: 105
-        y: 223
-        width: 100
-        height: 100
+        x: 223
+        y: 446
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 111
-        width: 100
-        height: 100
+        x: 13
+        y: 223
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_6
       rect:
         serializedVersion: 2
-        x: 105
-        y: 111
-        width: 100
-        height: 100
+        x: 223
+        y: 223
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 13
         y: 0
-        width: 100
-        height: 100
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
     - name: tiles_8
       rect:
         serializedVersion: 2
-        x: 105
+        x: 223
         y: 0
-        width: 100
-        height: 100
+        width: 199
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -99.5, y: 99.5}
+        - {x: -99.5, y: -99.5}
+        - {x: 99.5, y: -99.5}
+        - {x: 99.5, y: 99.5}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

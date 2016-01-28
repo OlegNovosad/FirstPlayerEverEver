@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f1b30691c2d2741fdbe0a3f1bbfbf5f4
-timeCreated: 1453598699
+timeCreated: 1453921600
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -56,32 +56,32 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 114
-        width: 99
-        height: 99
+        y: 227
+        width: 198
+        height: 199
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -49.5, y: 49.5}
-        - {x: -49.5, y: -49.5}
-        - {x: 49.5, y: -49.5}
-        - {x: 49.5, y: 49.5}
+      - - {x: -99, y: 99.5}
+        - {x: -99, y: -99.5}
+        - {x: 99, y: -99.5}
+        - {x: 99, y: 99.5}
     - name: spikes_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 99
-        height: 99
+        width: 198
+        height: 199
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -49.5, y: 49.5}
-        - {x: -49.5, y: -49.5}
-        - {x: 49.5, y: -49.5}
-        - {x: 49.5, y: 49.5}
+      - - {x: -99, y: 99.5}
+        - {x: -99, y: -99.5}
+        - {x: 99, y: -99.5}
+        - {x: 99, y: 99.5}
     outline: []
   spritePackingTag: 
   userData: 
