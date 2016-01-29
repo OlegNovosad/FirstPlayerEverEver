@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public AudioClip manGetTired;
 	public AudioClip collectSound;
 	public AudioClip grandpaSound;
+	public AudioClip cipo4kaSound;
 
 	public Sprite spikeOff;
 	public Sprite spikeOn;
@@ -24,8 +25,9 @@ public class Player : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
-	public GameObject level2Wall;
-	public GameObject level4Wall;
+	public GameObject [] level2Walls;
+	public GameObject [] level3Walls;
+	public GameObject [] level4Walls;
 	public GameObject garlic;
 
 	public float flowersNumber = Constants.FlowersCount; // magic number
@@ -72,8 +74,13 @@ public class Player : MonoBehaviour
 		//Check if we have a non-zero value for horizontal or vertical
 		if (horizontal != 0 || vertical != 0)
 		{
+			animator.SetBool("IsMoving", true);
 			Move(horizontal, vertical);
 			SoundManager.instance.RandomizeSfx(randomMoveSound);
+		}
+		else
+		{
+			animator.SetBool("IsMoving", false);
 		}
 	}
 
@@ -117,44 +124,52 @@ public class Player : MonoBehaviour
 				break;
 		case "Grandpa":
 			SoundManager.instance.PlayPlayersSingle (grandpaSound);
-			if (GameManager.instance.isFirstLevel) {
+			if (GameManager.instance.isFirstLevel) 
+			{
 				GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-				if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) {
+				if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) 
+				{
 					GameObject.Find ("/Canvas/GameNameText").SetActive (false);
 				}
-				if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) {
+				if (GameObject.Find ("/Canvas/HUD/GameNameText") && GameObject.Find ("/Canvas/HUD/GameNameText").activeSelf) {
+					GameObject.Find ("/Canvas/HUD/GameNameText").SetActive (false);
+				}
+				if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
+				{
 					GameObject.Find ("wizard").SetActive (false);
 				}
 			}
-//			else if (GameManager.instance.isLastLevel) {
-//			}
-			else {
-				if (GameManager.instance.questState == Constants.QuestState.Done) {
-					GameManager.instance.ShowModalDialogPanel ("Well done. You can continue your journey.", "Ok");
-					Destroy (level2Wall);
+			else 
+			{
+				if (GameManager.instance.questState == Constants.QuestState.Done)
+				{
+					GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
+					for (int i = 0; i < level2Walls.Length; i++) {
+						Destroy (level2Walls[i]);
+					}
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.None) {
+				if (GameManager.instance.questState == Constants.QuestState.None) 
+				{
 					GameManager.instance.questState = Constants.QuestState.Started;
-					GameManager.instance.ShowModalDialogPanel ("Your quests start here. Collect all flowers before you die. MUHAHHAHA.", "Ok");
+					GameManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.Started) {
+				if (GameManager.instance.questState == Constants.QuestState.Started) 
+				{
 					GameManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
 					return;
 				}
 
-				if (GameManager.instance.questState == Constants.QuestState.InProgress) {
+				if (GameManager.instance.questState == Constants.QuestState.InProgress) 
+				{
 					GameManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
 					return;
 				}
 			}
-
-
-
-				break;
+			break;
 			case "Phrase":
 				if (!phraseUsed)
 				{
@@ -172,14 +187,18 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Lock":
-				if (PlayerManager.instance.hasKey) {
-					GameObject.Find ("Lock").SetActive (false);
-					GameManager.instance.ShowModalDialogPanel ("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
-					GameObject.Find ("LevelHiddenPassageWall1").SetActive (false);
-					GameObject.Find ("LevelHiddenPassageWall2").SetActive (false);
-					GameObject.Find ("/Canvas/HUD/KeyImage").SetActive (false);
-				} else {
-					GameManager.instance.ShowTooltipMessage ("Mmmm? Me don't know what this is.");
+				if (PlayerManager.instance.hasKey) 
+				{
+					GameObject.Find("Lock").SetActive(false);
+					GameManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
+					for (int i = 0; i < level3Walls.Length; i++) {
+						Destroy (level3Walls[i]);
+					}
+					GameObject.Find("/Canvas/HUD/KeyImage").SetActive(false);
+				} 
+				else 
+				{
+					GameManager.instance.ShowTooltipMessage("Mmmm? Me don't know what this is.");
 				}
 			break;
 			case "Bat":
@@ -193,14 +212,20 @@ public class Player : MonoBehaviour
 				{
 					GameManager.instance.DamageBat(5);
 				}
-
-				StartCoroutine(RestartTrigger(other));
+				
+				if (other != null)
+				{
+					StartCoroutine(RestartTrigger(other));
+				}
 				break;
 			case "Vampire":
 				if (hasGarlic)
 				{
 					Destroy(GameManager.instance.vampire);
-					Destroy(level4Wall);
+				for (int i = 0; i < level4Walls.Length; i++) {
+					Destroy (level4Walls[i]);
+				}
+					
 				}
 				else
 				{
@@ -215,21 +240,21 @@ public class Player : MonoBehaviour
 					SoundManager.instance.PlayPlayersSingle(mmmSound);
 				}
 				break;
-
 			case "Cipo4ka":
-				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?");
+				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
+				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?", true);
 				GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
 				break;
 			case "GrandpaFinal":
-				GameManager.instance.ShowModalDialogPanel ("Great choice, and here is your reward!", "Aww! My wife!");
+				GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
 				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = wizardCipo4ka;
 				break;
 			case "Exit":
 				GameManager.instance.StartFromTheBeginning();
 				break;
-			case "Sign":
-				GameManager.instance.ShowTooltipMessage(Constants.SignMessage);
-				SoundManager.instance.PlayPlayersSingle(mmmSound);
+			case "Tablet":
+				Tablet tablet = other.GetComponent<Tablet>();
+				GameManager.instance.ShowTooltipMessage(tablet.setTabletMessage());
 				break;
 			default: break;
 		}
@@ -251,6 +276,8 @@ public class Player : MonoBehaviour
 			case "Phrase":
 			case "Fire":
 			case "Sign":
+			case "Lock":
+			case "Tablet":
 				GameManager.instance.HideTooltipMessage();
 				break;
 			default: break;
@@ -263,18 +290,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
-    private void FixedUpdate()
-    {
-        // Set the vertical animation
-//		animator.SetFloat("vSpeed", Rigidbody2D.velocity.y);
-    }
-
     public void Move(float hMove, float vMove)
     {
-        // The Speed animator parameter is set to the absolute value of the horizontal input.
-//        animator.SetFloat("Speed", Mathf.Abs(move));
-
 		targetPosition = new Vector3(hMove, vMove, 0);
 
 		//Move Player
@@ -286,15 +303,16 @@ public class Player : MonoBehaviour
             // ... flip the player.
             Flip();
         }
-
-            // Otherwise if the input is moving the player left and the player is facing right...
+		// Otherwise if the input is moving the player left and the player is facing right...
 		else if (hMove < 0 && facingRight)
         {
-            // ... flip the player.
             Flip();
         }
     }
 
+	/// <summary>
+	/// Flip the player.
+	/// </summary>
     private void Flip()
     {
         // Switch the way the player is labelled as facing.

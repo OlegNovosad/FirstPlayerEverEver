@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
-	List<Room> currentRooms = new List<Room>();
 	public static GameManager instance = null;
 	public GameObject bat;
 	public GameObject vampire;
@@ -196,6 +195,11 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void StartFromTheBeginning()
+	{
+		SceneManager.LoadScene(5);
+	}
+
+	public void StartAgain()
 	{
 		SceneManager.LoadScene(0);
 	}

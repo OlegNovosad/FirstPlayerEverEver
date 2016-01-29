@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 114bf2bc94aff4701b728ea0408fc5cb
-timeCreated: 1453594485
+timeCreated: 1453918783
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -57,39 +57,42 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 39
-        height: 100
+        width: 78
+        height: 201
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -5.5, y: 50}
-        - {x: -19.5, y: 27}
-        - {x: -19.5, y: -33}
-        - {x: -16.5, y: -50}
-        - {x: 19.5, y: -50}
-        - {x: 19.5, y: 20}
-        - {x: 4.5, y: 50}
+      - - {x: -3, y: 100.5}
+        - {x: -39, y: 46.5}
+        - {x: -39, y: -60.5}
+        - {x: -34, y: -97.5}
+        - {x: -31, y: -100.5}
+        - {x: 24, y: -100.5}
+        - {x: 37, y: -97.5}
+        - {x: 39, y: -75.5}
+        - {x: 39, y: 30.5}
+        - {x: 4, y: 100.5}
     - name: wizard_1
       rect:
         serializedVersion: 2
-        x: 42
-        y: 0
-        width: 39
-        height: 100
+        x: 83
+        y: 3
+        width: 78
+        height: 201
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 3.5, y: 50}
-        - {x: -2.5, y: 50}
-        - {x: -19.5, y: 22}
-        - {x: -19.5, y: -43}
-        - {x: -18.5, y: -50}
-        - {x: 14.5, y: -50}
-        - {x: 18.5, y: -43}
-        - {x: 19.5, y: -15}
-        - {x: 19.5, y: 16}
+      - - {x: -3, y: 100.5}
+        - {x: -39, y: 56.5}
+        - {x: -39, y: -65.5}
+        - {x: -30, y: -100.5}
+        - {x: 29, y: -100.5}
+        - {x: 34, y: -98.5}
+        - {x: 39, y: -75.5}
+        - {x: 39, y: 51.5}
+        - {x: 11, y: 100.5}
     outline: []
   spritePackingTag: 
   userData: 
