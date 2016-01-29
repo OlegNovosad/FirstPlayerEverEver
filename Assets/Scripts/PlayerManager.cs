@@ -22,17 +22,59 @@ public class PlayerManager : MonoBehaviour
 
 	void Awake()
 	{
-		if (instance != null && instance != this)
+		if (instance == null)
 		{
-			Destroy(gameObject);
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(this);
 		}
 
-		instance = this;
+		DontDestroyOnLoad(this);
+
+		healthbar = GameObject.Find("Canvas/HUD/Healthbar").GetComponent<Scrollbar>();
+		throwSpearButton = GameObject.Find("Canvas/HUD/Skills/ThrowSpear").GetComponent<Button>();
+		pullOutSpearButton = GameObject.Find("Canvas/HUD/Skills/PullOutSpear").GetComponent<Button>();
+		healthAmount = GameObject.Find("Canvas/HUD/Healthbar/Amount").GetComponent<Text>();
+
 		hasKey = false;
 	}
 
 	void Update()
 	{
+		if (healthbar == null)
+		{
+			healthbar = GameObject.Find("Canvas/HUD/Healthbar").GetComponent<Scrollbar>();	
+		}
+
+		if (throwSpearButton == null)
+		{
+			throwSpearButton = GameObject.Find("Canvas/HUD/Skills/ThrowSpear").GetComponent<Button>();	
+		}
+
+		if (pullOutSpearButton == null)
+		{
+			pullOutSpearButton = GameObject.Find("Canvas/HUD/Skills/PullOutSpear").GetComponent<Button>();	
+		}
+
+		if (healthAmount == null)
+		{
+			healthAmount = GameObject.Find("Canvas/HUD/Healthbar/Amount").GetComponent<Text>();
+		}
+
+		healthbar.size = playerHealths / 42f;
+
+		if (playerHealths > 0)
+		{
+			healthAmount.text = playerHealths.ToString();
+		}
+		else
+		{
+			healthAmount.text = "0";
+			StartCoroutine(GameManager.instance.GameOver());
+		}
+
 		if (selectedSkill == Constants.Skill.ThrowSpear)
 		{
 			throwSpearButton.gameObject.SetActive(true);
