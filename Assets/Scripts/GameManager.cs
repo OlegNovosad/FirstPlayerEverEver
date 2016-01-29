@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 	public int vampireHP = 9999;
 
 	public bool isFirstLevel;
-
+	public bool isLastLevel;
 
 	public Constants.QuestState questState = Constants.QuestState.None;
 
@@ -51,8 +51,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
-		if (SceneManager.GetActiveScene ().name == "Level1") {
+		if (SceneManager.GetActiveScene().name == "Level1") {
 			isFirstLevel = true;
+			ShowModalDialogPanel ("Hello stranger \nare \nyou ready to play\nfirst game ever... ever?!", "What?", false, true);
+		}
+
+		if (SceneManager.GetActiveScene().name == "Level5") {
+			isLastLevel = true;
 			ShowModalDialogPanel ("Hello stranger \nare \nyou ready to play\nfirst game ever... ever?!", "What?", false, true);
 		}
 	}

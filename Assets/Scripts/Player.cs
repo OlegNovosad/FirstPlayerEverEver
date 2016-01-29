@@ -34,10 +34,8 @@ public class Player : MonoBehaviour
 
 	private bool phraseUsed;
 
-	public Sprite cipo4kaVamp;
-	public Sprite cipo4ka;
-	public Sprite wizardCipo4ka;
-	public Sprite wizard;
+	public Sprite vampire;
+	public Sprite princess;
 
 	public string[] phrases = {
 		"I wanna poooo..."
@@ -122,7 +120,7 @@ public class Player : MonoBehaviour
 
 				GameManager.instance.StartPoisoning();
 				break;
-		case "Grandpa":
+		case "Wizard":
 			SoundManager.instance.PlayPlayersSingle (grandpaSound);
 			if (GameManager.instance.isFirstLevel) 
 			{
@@ -138,6 +136,11 @@ public class Player : MonoBehaviour
 				{
 					GameObject.Find ("wizard").SetActive (false);
 				}
+			}
+			else if (GameManager.instance.isLastLevel)
+			{
+				GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
+				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
 			}
 			else 
 			{
@@ -240,14 +243,10 @@ public class Player : MonoBehaviour
 					SoundManager.instance.PlayPlayersSingle(mmmSound);
 				}
 				break;
-			case "Cipo4ka":
+			case "Princess":
 				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
 				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?", true);
-				GameObject.Find ("princess").GetComponent<SpriteRenderer>().sprite = cipo4kaVamp;
-				break;
-			case "GrandpaFinal":
-				GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
-				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = wizardCipo4ka;
+				GameObject.Find("princess").GetComponent<SpriteRenderer>().sprite = vampire;
 				break;
 			case "Exit":
 				GameManager.instance.StartFromTheBeginning();
