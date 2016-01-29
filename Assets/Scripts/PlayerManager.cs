@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour 
@@ -12,13 +13,17 @@ public class PlayerManager : MonoBehaviour
 	public Scrollbar healthbar;
 	public Text healthAmount;
 
-	public GameObject spearSource;
 	public GameObject spear;
 
 	public Button throwSpearButton;
 	public Button pullOutSpearButton;
 
+	public List<GameObject> spears = new List<GameObject>();
+
 	public bool hasKey;
+	public bool hasSpear = false;
+
+	public GameObject currentSpear = null;
 
 	void Awake()
 	{
@@ -106,9 +111,25 @@ public class PlayerManager : MonoBehaviour
 
 	public void ThrowSpear(GameObject player)
 	{
-		Damage(6);
-		GameObject s = Instantiate(spear, spearSource.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-30, 30)))) as GameObject;
-		StartCoroutine(Move(s.transform, player.transform, 5f));
+		if (hasSpear)
+		{
+			// throw spear
+		}
+		else
+		{
+			GameObject s = Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, 0 - Camera.main.transform.position.z)), Quaternion.Euler(new Vector3(0, 0, 30))) as GameObject;
+			StartCoroutine(Move(s.transform, player.transform, 2f));
+			spears.Add(s);
+		}
+	}
+
+	public void PullOutSpear(GameObject player)
+	{
+		if (player.transform.childCount > 0)
+		{
+			currentSpear = Instantiate(player.transform.GetChild(0).gameObject);
+			Destroy(player.transform.GetChild(0).gameObject);
+		}
 	}
 
 	private IEnumerator Move(Transform source, Transform target, float duration)

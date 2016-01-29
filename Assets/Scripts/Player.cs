@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
 	};
 
 	private bool hasGarlic = false;
-	private bool hasSpear = false;
 
 	private AudioClip randomMoveSound;
 	
@@ -120,59 +119,62 @@ public class Player : MonoBehaviour
 
 				GameManager.instance.StartPoisoning();
 				break;
-		case "Wizard":
-			SoundManager.instance.PlayPlayersSingle (grandpaSound);
-			if (GameManager.instance.isFirstLevel) 
-			{
-				GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-				if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) 
+			case "Spear":
+				PlayerManager.instance.Damage(3);
+				break;
+			case "Wizard":
+				SoundManager.instance.PlayPlayersSingle (grandpaSound);
+				if (GameManager.instance.isFirstLevel) 
 				{
-					GameObject.Find ("/Canvas/GameNameText").SetActive (false);
-				}
-				if (GameObject.Find ("/Canvas/HUD/GameNameText") && GameObject.Find ("/Canvas/HUD/GameNameText").activeSelf) {
-					GameObject.Find ("/Canvas/HUD/GameNameText").SetActive (false);
-				}
-				if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
-				{
-					GameObject.Find ("wizard").SetActive (false);
-				}
-			}
-			else if (GameManager.instance.isLastLevel)
-			{
-				GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
-				GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
-			}
-			else 
-			{
-				if (GameManager.instance.questState == Constants.QuestState.Done)
-				{
-					GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
-					for (int i = 0; i < level2Walls.Length; i++) {
-						Destroy (level2Walls[i]);
+					GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
+					if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) 
+					{
+						GameObject.Find ("/Canvas/GameNameText").SetActive (false);
 					}
-					return;
+					if (GameObject.Find ("/Canvas/HUD/GameNameText") && GameObject.Find ("/Canvas/HUD/GameNameText").activeSelf) {
+						GameObject.Find ("/Canvas/HUD/GameNameText").SetActive (false);
+					}
+					if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
+					{
+						GameObject.Find ("wizard").SetActive (false);
+					}
 				}
-
-				if (GameManager.instance.questState == Constants.QuestState.None) 
+				else if (GameManager.instance.isLastLevel)
 				{
-					GameManager.instance.questState = Constants.QuestState.Started;
-					GameManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
-					return;
+					GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
+					GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
 				}
-
-				if (GameManager.instance.questState == Constants.QuestState.Started) 
+				else 
 				{
-					GameManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
-					return;
-				}
+					if (GameManager.instance.questState == Constants.QuestState.Done)
+					{
+						GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
+						for (int i = 0; i < level2Walls.Length; i++) {
+							Destroy (level2Walls[i]);
+						}
+						return;
+					}
 
-				if (GameManager.instance.questState == Constants.QuestState.InProgress) 
-				{
-					GameManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
-					return;
+					if (GameManager.instance.questState == Constants.QuestState.None) 
+					{
+						GameManager.instance.questState = Constants.QuestState.Started;
+						GameManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
+						return;
+					}
+
+					if (GameManager.instance.questState == Constants.QuestState.Started) 
+					{
+						GameManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
+						return;
+					}
+
+					if (GameManager.instance.questState == Constants.QuestState.InProgress) 
+					{
+						GameManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
+						return;
+					}
 				}
-			}
-			break;
+				break;
 			case "Phrase":
 				if (!phraseUsed)
 				{
@@ -207,7 +209,7 @@ public class Player : MonoBehaviour
 			case "Bat":
 				PlayerManager.instance.Damage(3);
 
-				if (hasSpear)
+				if (PlayerManager.instance.hasSpear)
 				{
 					GameManager.instance.DamageBat(10);
 				}
