@@ -21,9 +21,13 @@ public class PlayerManager : MonoBehaviour
 	public List<GameObject> spears = new List<GameObject>();
 
 	public bool hasKey;
+
 	public bool hasSpear = false;
 
 	public GameObject currentSpear = null;
+
+	public bool hasGarlic = false;
+
 
 	void Awake()
 	{
@@ -144,4 +148,6 @@ public class PlayerManager : MonoBehaviour
 		source.position = target.position;
 		source.SetParent(target);
 	}
+
+
 }

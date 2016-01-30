@@ -54,12 +54,13 @@ public class GameManager : MonoBehaviour
 		if (SceneManager.GetActiveScene().name == "Level1") {
 			isFirstLevel = true;
 			ShowModalDialogPanel ("Hello stranger \nare \nyou ready to play\nfirst game ever... ever?!", "What?", false, true);
-		}
-
-		if (SceneManager.GetActiveScene().name == "Level5") {
+		}else if (SceneManager.GetActiveScene().name == "Level5") {
 			isLastLevel = true;
 			ShowModalDialogPanel ("Hello stranger \nare \nyou ready to play\nfirst game ever... ever?!", "What?", false, true);
-		}
+		} else if (SceneManager.GetActiveScene().name == "Level4"){
+			//setting the chestOpened to required id depending on the scene
+				chestOpened = 4;
+			}
 	}
 
 	void Update()

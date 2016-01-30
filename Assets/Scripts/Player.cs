@@ -40,8 +40,9 @@ public class Player : MonoBehaviour
 	public string[] phrases = {
 		"I wanna poooo..."
 	};
+		
+	private bool hasSpear = false;
 
-	private bool hasGarlic = false;
 
 	private AudioClip randomMoveSound;
 	
@@ -224,7 +225,7 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Vampire":
-				if (hasGarlic)
+			if (PlayerManager.instance.hasGarlic)
 				{
 					Destroy(GameManager.instance.vampire);
 				for (int i = 0; i < level4Walls.Length; i++) {
@@ -235,14 +236,6 @@ public class Player : MonoBehaviour
 				else
 				{
 					PlayerManager.instance.Damage(50);
-				}
-				break;
-			case "Garlic":
-				if (GameManager.instance.vampire.GetComponent<Vampire>().turn)
-				{
-					Destroy(garlic);
-					hasGarlic = true;
-					SoundManager.instance.PlayPlayersSingle(mmmSound);
 				}
 				break;
 			case "Princess":
