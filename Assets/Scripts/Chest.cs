@@ -36,7 +36,7 @@ public class Chest : MonoBehaviour
 				break;
 			//LVL 4 items:
 			case 4:
-				GameManager.instance.ShowModalDialogPanel ("What a nice wooden stake. You pick it up, but it breaks in your hand. You notice note: Made in China on the hammer.", "Uhggrrr");
+				GameManager.instance.ShowModalDialogPanel ("What a nice wooden stake. You pick it up, but it breaks in your hand. You notice a note \"Made in China\".", "Uhggrrr");
 				GameObject.Find("/Canvas/ModalDialog/stakeImage").SetActive(true);
 				break;
 			case 5:

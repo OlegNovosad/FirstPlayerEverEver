@@ -240,7 +240,7 @@ public class Player : MonoBehaviour
 				break;
 			case "Princess":
 				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
-				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom.", "What?", true);
+				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
 				GameObject.Find("princess").GetComponent<SpriteRenderer>().sprite = vampire;
 				break;
 			case "Exit":
