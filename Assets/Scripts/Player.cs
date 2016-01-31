@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     private Animator animator;            // Reference to the player's animator component.
     private bool facingRight = true;  // For determining which way the player is currently facing.
 
-    public Ray movingRay;
     public Vector3 targetPosition;
 
     float horizontal = 0;
@@ -42,7 +41,6 @@ public class Player : MonoBehaviour
 	};
 		
 	private bool hasSpear = false;
-
 
 	private AudioClip randomMoveSound;
 	
@@ -225,17 +223,17 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Vampire":
-			if (PlayerManager.instance.hasGarlic)
+				if (PlayerManager.instance.hasGarlic)
 				{
 					Destroy(GameManager.instance.vampire);
-				for (int i = 0; i < level4Walls.Length; i++) {
-					Destroy (level4Walls[i]);
-				}
-					
+					for (int i = 0; i < level4Walls.Length; i++) {
+						Destroy (level4Walls[i]);
+					}
 				}
 				else
 				{
-					PlayerManager.instance.Damage(50);
+					// TODO: Set conditions in game design on how much and when the vampire hurts player.
+					PlayerManager.instance.Damage(6);
 				}
 				break;
 			case "Princess":

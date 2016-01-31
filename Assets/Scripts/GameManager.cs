@@ -51,15 +51,20 @@ public class GameManager : MonoBehaviour
 		}
 
 		instance = this;
-		if (SceneManager.GetActiveScene().name == "Level1") {
+		if (SceneManager.GetActiveScene().name == "Level1") 
+		{
 			isFirstLevel = true;
-			ShowModalDialogPanel ("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
-		}else if (SceneManager.GetActiveScene().name == "Level5") {
+			ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
+		}
+		else if (SceneManager.GetActiveScene().name == "Level5") 
+		{
 			isLastLevel = true;
-		} else if (SceneManager.GetActiveScene().name == "Level4"){
-			//setting the chestOpened to required id depending on the scene
-				chestOpened = 4;
-			}
+		} 
+		else if (SceneManager.GetActiveScene().name == "Level4")
+		{
+			// setting the chestOpened to required id depending on the scene
+			chestOpened = 4;
+		}
 	}
 
 	void Update()
@@ -84,12 +89,18 @@ public class GameManager : MonoBehaviour
 		if (batHP <= 0)
 		{
 			Destroy(bat);
-			SoundManager.instance.PlayPlayersSingle(intovampire);
-			vampire.GetComponent<SpriteRenderer>().enabled = true;
-			vampire.GetComponent<BoxCollider2D>().isTrigger = true;
-			ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
-			vampire.GetComponent<Vampire>().turn = true;
+
+			InitVampire();
 		}
+	}
+
+	private void InitVampire()
+	{
+		vampire = Instantiate(vampire, bat.transform.position, Quaternion.identity) as GameObject;
+		SoundManager.instance.PlayPlayersSingle(intovampire);
+		vampire.GetComponent<SpriteRenderer>().enabled = true;
+		vampire.GetComponent<BoxCollider2D>().isTrigger = true;
+		ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
 	}
 
 	/// <summary>
@@ -150,7 +161,18 @@ public class GameManager : MonoBehaviour
 		isPaused = false;
 	}
 
-	//Restart reloads the scene when called.
+	/// <summary>
+	/// Pause the game.
+	/// </summary>
+	/// <param name="pause">If set to <c>true</c> then pause game.</param>
+	public void Pause(bool pause)
+	{
+		isPaused = pause;
+	}
+
+	/// <summary>
+	/// Restart reloads the scene when called.
+	/// </summary>
 	public void Restart()
 	{
 		//Load the last scene loaded, in this case Main, the only scene in the game.
@@ -159,6 +181,9 @@ public class GameManager : MonoBehaviour
 		PlayerManager.instance.healthbar.size = 1;
 	}
 
+	/// <summary>
+	/// Loads the next level.
+	/// </summary>
 	public void LoadNextLevel()
 	{
 		SoundManager.instance.PlayPlayersSingle(wallSound);
@@ -169,6 +194,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Selects the skill.
+	/// </summary>
+	/// <param name="choice">Choice of the skill.</param>
 	public void SelectSkill(int choice)
 	{
 		switch (choice)
@@ -192,6 +221,10 @@ public class GameManager : MonoBehaviour
 		isPoisoning = !isPoisoning;
 	}
 
+	/// <summary>
+	/// Finishes game.
+	/// </summary>
+	/// <returns>The over.</returns>
 	public IEnumerator GameOver()
 	{
 		yield return new WaitForSeconds(0.2f);
