@@ -195,7 +195,8 @@ public class Player : MonoBehaviour
 				{
 					GameObject.Find("Lock").SetActive(false);
 					GameManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
-					for (int i = 0; i < level3Walls.Length; i++) {
+					for (int i = 0; i < level3Walls.Length; i++) 
+					{
 						Destroy (level3Walls[i]);
 					}
 					GameObject.Find("/Canvas/HUD/KeyImage").SetActive(false);

@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
 		//Load the last scene loaded, in this case Main, the only scene in the game.
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		PlayerManager.instance.playerHealths = Constants.MaxPlayerHealth;
-		PlayerManager.instance.healthbar.size = 1;
+		UIManager.instance.healthbar.size = 1;
 	}
 
 	/// <summary>
