@@ -93,11 +93,11 @@ public class Player : MonoBehaviour
 				StartCoroutine(GameManager.instance.GameOver());
 				break;
 			case "Flower":
-				GameManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
+				UIManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
 				break;
 			case "Fire":
-				GameManager.instance.ShowTooltipMessage(Constants.FireMessage);
+				UIManager.instance.ShowTooltipMessage(Constants.FireMessage);
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
 				break;
 			case "QuestFlower":
@@ -116,7 +116,14 @@ public class Player : MonoBehaviour
 					GameManager.instance.questState = Constants.QuestState.InProgress;
 				}
 
-				GameManager.instance.StartPoisoning();
+				if (GameManager.instance.isPoisoning) 
+				{
+					GameManager.instance.StopPoisoning();
+				}
+				else
+				{
+					GameManager.instance.StartPoisoning();
+				}
 				break;
 			case "Spear":
 				PlayerManager.instance.Damage(3);
@@ -125,14 +132,7 @@ public class Player : MonoBehaviour
 				SoundManager.instance.PlayPlayersSingle (grandpaSound);
 				if (GameManager.instance.isFirstLevel) 
 				{
-					GameManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-					if (GameObject.Find ("/Canvas/GameNameText") && GameObject.Find ("/Canvas/GameNameText").activeSelf) 
-					{
-						GameObject.Find ("/Canvas/GameNameText").SetActive (false);
-					}
-					if (GameObject.Find ("/Canvas/HUD/GameNameText") && GameObject.Find ("/Canvas/HUD/GameNameText").activeSelf) {
-						GameObject.Find ("/Canvas/HUD/GameNameText").SetActive (false);
-					}
+					UIManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
 					if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
 					{
 						GameObject.Find ("wizard").SetActive (false);
@@ -140,14 +140,14 @@ public class Player : MonoBehaviour
 				}
 				else if (GameManager.instance.isLastLevel)
 				{
-					GameManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
+					UIManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
 					GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
 				}
 				else 
 				{
 					if (GameManager.instance.questState == Constants.QuestState.Done)
 					{
-						GameManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
+						UIManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
 						for (int i = 0; i < level2Walls.Length; i++) {
 							Destroy (level2Walls[i]);
 						}
@@ -157,19 +157,19 @@ public class Player : MonoBehaviour
 					if (GameManager.instance.questState == Constants.QuestState.None) 
 					{
 						GameManager.instance.questState = Constants.QuestState.Started;
-						GameManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
+						UIManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
 						return;
 					}
 
 					if (GameManager.instance.questState == Constants.QuestState.Started) 
 					{
-						GameManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
+						UIManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
 						return;
 					}
 
 					if (GameManager.instance.questState == Constants.QuestState.InProgress) 
 					{
-						GameManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
+						UIManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
 						return;
 					}
 				}
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
 				if (!phraseUsed)
 				{
 					SoundManager.instance.PlayPlayersSingle(manGetTired);
-					GameManager.instance.ShowTooltipMessage(phrases[Random.Range(0, phrases.Length)]);
+					UIManager.instance.ShowTooltipMessage(phrases[Random.Range(0, phrases.Length)]);
 					phraseUsed = true;
 				}
 				break;
@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
 				if (PlayerManager.instance.hasKey) 
 				{
 					GameObject.Find("Lock").SetActive(false);
-					GameManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
+					UIManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
 					for (int i = 0; i < level3Walls.Length; i++) 
 					{
 						Destroy (level3Walls[i]);
@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
 				} 
 				else 
 				{
-					GameManager.instance.ShowTooltipMessage("Mmmm? Me don't know what this is.");
+					UIManager.instance.ShowTooltipMessage("Mmmm? Me don't know what this is.");
 				}
 			break;
 			case "Bat":
@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
 				break;
 			case "Princess":
 				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
-				GameManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
+				UIManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
 				GameObject.Find("princess").GetComponent<SpriteRenderer>().sprite = vampire;
 				break;
 			case "Exit":
@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
 				break;
 			case "Tablet":
 				Tablet tablet = other.GetComponent<Tablet>();
-				GameManager.instance.ShowTooltipMessage(tablet.setTabletMessage());
+				UIManager.instance.ShowTooltipMessage(tablet.setTabletMessage());
 				break;
 			default: break;
 		}
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
 			case "Sign":
 			case "Lock":
 			case "Tablet":
-				GameManager.instance.HideTooltipMessage();
+				UIManager.instance.HideTooltipMessage();
 				break;
 			default: break;
 		}

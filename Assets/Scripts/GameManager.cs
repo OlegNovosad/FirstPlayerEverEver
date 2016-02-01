@@ -10,17 +10,6 @@ public class GameManager : MonoBehaviour
 	public GameObject bat;
 	public GameObject vampire;
 
-	public GameObject tooltipPanel;
-	public Text tooltipPanelText;
-	public GameObject selectDialogPanel;
-	public GameObject modalDialogPanel;
-	public Text modalDialogButtonText;
-	public Text modalDialogMessageText;
-
-	public GameObject screenOverlay;
-
-	public Button modalDialogButton;
-
 	public bool isPaused = false;
 
 	public int totalLevels = 4;
@@ -31,12 +20,12 @@ public class GameManager : MonoBehaviour
 	public AudioClip batSqueak;
 	public AudioClip intovampire;
 
-	private bool isPoisoning = false;
+	public bool isPoisoning = false;
 	private float timeLeft = 42; // equal to hp number
 
 	public int chestOpened = 0;
 	public int batHP = 30;
-	public int vampireHP = 9999;
+	public int vampireHP = 30;
 
 	public bool isFirstLevel;
 	public bool isLastLevel;
@@ -45,16 +34,19 @@ public class GameManager : MonoBehaviour
 
 	void Awake()
 	{
-		if (instance != null && instance != this)
+		if (instance == null)
 		{
-			Destroy(gameObject);
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(this);
 		}
 
-		instance = this;
 		if (SceneManager.GetActiveScene().name == "Level1") 
 		{
 			isFirstLevel = true;
-			ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
+			UIManager.instance.ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
 		}
 		else if (SceneManager.GetActiveScene().name == "Level5") 
 		{
@@ -88,77 +80,20 @@ public class GameManager : MonoBehaviour
 
 		if (batHP <= 0)
 		{
+			Vector3 batPosition = bat.transform.position;
 			Destroy(bat);
 
-			InitVampire();
+			InitVampire(batPosition);
 		}
 	}
 
-	private void InitVampire()
+	private void InitVampire(Vector3 batPosition)
 	{
-		vampire = Instantiate(vampire, bat.transform.position, Quaternion.identity) as GameObject;
+		vampire = Instantiate(vampire, batPosition, Quaternion.identity) as GameObject;
 		SoundManager.instance.PlayPlayersSingle(intovampire);
 		vampire.GetComponent<SpriteRenderer>().enabled = true;
 		vampire.GetComponent<BoxCollider2D>().isTrigger = true;
-		ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
-	}
-
-	/// <summary>
-	/// Shows the tooltip message.
-	/// </summary>
-	/// <param name="message">Message.</param>
-	public void ShowTooltipMessage(string message)
-	{
-		tooltipPanel.SetActive(true);
-		tooltipPanelText.text = message;
-	}
-
-	/// <summary>
-	/// Hides the tooltip message.
-	/// </summary>
-	public void HideTooltipMessage()
-	{
-		tooltipPanel.SetActive(false);
-		tooltipPanelText.text = "";
-	}
-
-	public void ShowSelectDialogPanel()
-	{
-		isPaused = true;
-		selectDialogPanel.SetActive(true);
-	}
-
-	public void HideSelectDialogPanel()
-	{
-		selectDialogPanel.SetActive(false);
-		isPaused = false;
-	}
-
-	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false, bool firstLevel = false)
-	{
-		modalDialogPanel.SetActive(true);
-		modalDialogMessageText.text = message;
-		modalDialogButtonText.text = buttonText;
-
-		if (finishGame)
-		{
-			modalDialogButton.onClick.AddListener(() => Restart());
-		}
-		else
-		{
-			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel(firstLevel));
-		}
-
-		isPaused = true;
-	}
-
-	public void HideModalDialogPanel(bool firstLevel = false)
-	{
-		modalDialogButton.onClick.RemoveAllListeners();
-		modalDialogPanel.SetActive(false);
-		modalDialogMessageText.text = "";
-		modalDialogButtonText.text = "";
-		isPaused = false;
+		UIManager.instance.ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
 	}
 
 	/// <summary>
@@ -212,13 +147,20 @@ public class GameManager : MonoBehaviour
 				PlayerManager.instance.selectedSkill = Constants.Skill.None;
 				break;
 		}
-		HideSelectDialogPanel();
+		UIManager.instance.HideSelectDialogPanel();
+		UIManager.instance.DisplaySkill();
 	}
 
 	public void StartPoisoning()
 	{
-		screenOverlay.SetActive(!screenOverlay.activeSelf);
-		isPoisoning = !isPoisoning;
+		UIManager.instance.ShowScreenOverlay();
+		isPoisoning = true;
+	}
+
+	public void StopPoisoning()
+	{
+		UIManager.instance.HideScreenOverlay();
+		isPoisoning = false;
 	}
 
 	/// <summary>
@@ -229,7 +171,7 @@ public class GameManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 		SoundManager.instance.PlayPlayersSingle(deathSound);
-		GameManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart", true);
+		UIManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart", true);
 	}
 
 	public void StartFromTheBeginning()

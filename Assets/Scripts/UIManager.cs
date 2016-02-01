@@ -12,6 +12,19 @@ public class UIManager : MonoBehaviour
 	public Button throwSpearButton;
 	public Button pullOutSpearButton;
 
+	public GameObject tooltipPanel;
+	public Text tooltipPanelText;
+	public GameObject selectDialogPanel;
+	public GameObject modalDialogPanel;
+	public Text modalDialogButtonText;
+	public Text modalDialogMessageText;
+
+	// Ocasional items
+	public GameObject screenOverlay;
+	public Image key;
+
+	public Button modalDialogButton;
+
 	void Awake()
 	{
 		if (instance == null)
@@ -22,40 +35,16 @@ public class UIManager : MonoBehaviour
 		{
 			Destroy(this);
 		}
-
-		DontDestroyOnLoad(this);
-
-		healthbar = GameObject.Find("Canvas/HUD/Healthbar").GetComponent<Scrollbar>();
-		throwSpearButton = GameObject.Find("Canvas/HUD/Skills/ThrowSpear").GetComponent<Button>();
-		pullOutSpearButton = GameObject.Find("Canvas/HUD/Skills/PullOutSpear").GetComponent<Button>();
-		healthAmount = GameObject.Find("Canvas/HUD/Healthbar/Amount").GetComponent<Text>();
 	}
-	
-	// Update is called once per frame
-	void Update()
+
+	void Start()
 	{
-		if (healthbar == null)
-		{
-			healthbar = GameObject.Find("Canvas/HUD/Healthbar").GetComponent<Scrollbar>();	
-		}
-
-		if (throwSpearButton == null)
-		{
-			throwSpearButton = GameObject.Find("Canvas/HUD/Skills/ThrowSpear").GetComponent<Button>();	
-		}
-
-		if (pullOutSpearButton == null)
-		{
-			pullOutSpearButton = GameObject.Find("Canvas/HUD/Skills/PullOutSpear").GetComponent<Button>();	
-		}
-
-		if (healthAmount == null)
-		{
-			healthAmount = GameObject.Find("Canvas/HUD/Healthbar/Amount").GetComponent<Text>();
-		}
-
 		UpdateHUD();
+		DisplaySkill();
+	}
 
+	public void DisplaySkill()
+	{
 		if (PlayerManager.instance.selectedSkill == Constants.Skill.ThrowSpear)
 		{
 			throwSpearButton.gameObject.SetActive(true);
@@ -85,5 +74,73 @@ public class UIManager : MonoBehaviour
 			healthAmount.text = "0";
 			StartCoroutine(GameManager.instance.GameOver());
 		}
+	}
+
+	/// <summary>
+	/// Shows the tooltip message.
+	/// </summary>
+	/// <param name="message">Message.</param>
+	public void ShowTooltipMessage(string message)
+	{
+		tooltipPanel.SetActive(true);
+		tooltipPanelText.text = message;
+	}
+
+	/// <summary>
+	/// Hides the tooltip message.
+	/// </summary>
+	public void HideTooltipMessage()
+	{
+		tooltipPanel.SetActive(false);
+		tooltipPanelText.text = "";
+	}
+
+	public void ShowSelectDialogPanel()
+	{
+		GameManager.instance.Pause(true);
+		selectDialogPanel.SetActive(true);
+	}
+
+	public void HideSelectDialogPanel()
+	{
+		selectDialogPanel.SetActive(false);
+		GameManager.instance.Pause(false);
+	}
+
+	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false, bool firstLevel = false)
+	{
+		modalDialogPanel.SetActive(true);
+		modalDialogMessageText.text = message;
+		modalDialogButtonText.text = buttonText;
+
+		if (finishGame)
+		{
+			modalDialogButton.onClick.AddListener(() => GameManager.instance.Restart());
+		}
+		else
+		{
+			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel(firstLevel));
+		}
+
+		GameManager.instance.Pause(true);
+	}
+
+	public void HideModalDialogPanel(bool firstLevel = false)
+	{
+		modalDialogButton.onClick.RemoveAllListeners();
+		modalDialogPanel.SetActive(false);
+		modalDialogMessageText.text = "";
+		modalDialogButtonText.text = "";
+		GameManager.instance.Pause(false);
+	}
+
+	public void ShowScreenOverlay()
+	{
+		screenOverlay.SetActive(true);
+	}
+
+	public void HideScreenOverlay()
+	{
+		screenOverlay.SetActive(false);
 	}
 }

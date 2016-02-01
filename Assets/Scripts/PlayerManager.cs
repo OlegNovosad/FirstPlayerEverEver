@@ -80,6 +80,4 @@ public class PlayerManager : MonoBehaviour
 		source.position = target.position;
 		source.SetParent(target);
 	}
-
-
 }
