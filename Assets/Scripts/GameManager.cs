@@ -63,11 +63,11 @@ public class GameManager : MonoBehaviour
 
 		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
 		{
-			UIManager.instance.ShowDPad();	
+			UIManager.instance.ShowJoystick();	
 		}
 		else
 		{
-			UIManager.instance.HideDPad();
+			UIManager.instance.HideJoystick();
 		}
 	}
 
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		PlayerManager.instance.playerHealths = Constants.MaxPlayerHealth;
 		UIManager.instance.healthbar.size = 1;
+		UIManager.instance.UpdateHUD();
 	}
 
 	/// <summary>

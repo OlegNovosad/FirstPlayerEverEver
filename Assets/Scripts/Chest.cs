@@ -37,18 +37,15 @@ public class Chest : MonoBehaviour
 			//LVL 4 items:
 			case 4:
 				UIManager.instance.ShowModalDialogPanel ("What a nice wooden stake. You pick it up, but it breaks in your hand. You notice a note \"Made in China\".", "Uhggrrr");
-				GameObject.Find("/Canvas/ModalDialog/stakeImage").SetActive(true);
+				UIManager.instance.ShowItem(Constants.Item.Stake);
 				break;
 			case 5:
 				UIManager.instance.ShowModalDialogPanel ("What a nice shiny thing. Unfortunately it will work against vampires only in 200 000 years.", "Uhggrrr");
-				GameObject.Find("/Canvas/ModalDialog/stakeImage").SetActive(false);	
-				GameObject.Find("/Canvas/ModalDialog/crusifixImage").SetActive(true);
+				UIManager.instance.ShowItem(Constants.Item.Crusifix);
 				break;
 			case 6:
 				UIManager.instance.ShowModalDialogPanel ("What a smelly chest. May be this will help", "Yummy!");
-				GameObject.Find("/Canvas/ModalDialog/crusifixImage").SetActive(false);	
-				GameObject.Find("/Canvas/ModalDialog/garlicImage").SetActive(true);
-				GameObject.Find("/Canvas/HUD/garlicImage").SetActive(true);
+				UIManager.instance.ShowItem(Constants.Item.Garlic);
 				PlayerManager.instance.hasGarlic = true;
 				break;
 			default: break;

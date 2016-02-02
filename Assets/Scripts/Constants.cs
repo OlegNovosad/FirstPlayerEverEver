@@ -21,6 +21,13 @@ public class Constants
 		Done
 	}
 
+	public enum Item
+	{
+		Garlic,
+		Crusifix,
+		Stake
+	}
+
 	public const int MaxPlayerHealth = 42;
 	public const int FlowersCount = 17;
 }

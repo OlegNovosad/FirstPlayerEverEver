@@ -24,7 +24,12 @@ public class UIManager : MonoBehaviour
 	public GameObject screenOverlay;
 	public Image key;
 
-	public GameObject dpad;
+	public Image stake;
+	public Image crusifix;
+	public Image garlic;
+	public Image garlicHUD;
+
+	public GameObject joystick;
 
 	void Awake()
 	{
@@ -46,14 +51,14 @@ public class UIManager : MonoBehaviour
 
 	#region HUD Managing
 
-	public void ShowDPad()
+	public void ShowJoystick()
 	{
-		dpad.SetActive(true);
+		joystick.SetActive(true);
 	}
 
-	public void HideDPad()
+	public void HideJoystick()
 	{
-		dpad.SetActive(false);
+		joystick.SetActive(false);
 	}
 
 	public void DisplaySkill()
@@ -149,6 +154,25 @@ public class UIManager : MonoBehaviour
 		modalDialogMessageText.text = "";
 		modalDialogButtonText.text = "";
 		GameManager.instance.Pause(false);
+	}
+
+	public void ShowItem(Constants.Item item)
+	{
+		switch (item)
+		{
+			case Constants.Item.Stake:
+				stake.gameObject.SetActive(true);
+			break;
+			case Constants.Item.Crusifix:
+				stake.gameObject.SetActive(false);
+				crusifix.gameObject.SetActive(true);
+			break;
+			case Constants.Item.Garlic:
+				crusifix.gameObject.SetActive(false);
+				garlic.gameObject.SetActive(true);
+				garlicHUD.gameObject.SetActive(true);
+			break;
+		}
 	}
 
 	#endregion
