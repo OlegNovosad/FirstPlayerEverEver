@@ -18,12 +18,13 @@ public class UIManager : MonoBehaviour
 	public GameObject modalDialogPanel;
 	public Text modalDialogButtonText;
 	public Text modalDialogMessageText;
+	public Button modalDialogButton;
 
 	// Ocasional items
 	public GameObject screenOverlay;
 	public Image key;
 
-	public Button modalDialogButton;
+	public GameObject dpad;
 
 	void Awake()
 	{
@@ -41,6 +42,18 @@ public class UIManager : MonoBehaviour
 	{
 		UpdateHUD();
 		DisplaySkill();
+	}
+
+	#region HUD Managing
+
+	public void ShowDPad()
+	{
+		dpad.SetActive(true);
+	}
+
+	public void HideDPad()
+	{
+		dpad.SetActive(false);
 	}
 
 	public void DisplaySkill()
@@ -75,6 +88,10 @@ public class UIManager : MonoBehaviour
 			StartCoroutine(GameManager.instance.GameOver());
 		}
 	}
+
+	#endregion
+
+	#region Popups and tooltips
 
 	/// <summary>
 	/// Shows the tooltip message.
@@ -134,6 +151,10 @@ public class UIManager : MonoBehaviour
 		GameManager.instance.Pause(false);
 	}
 
+	#endregion
+
+	#region Overlays
+
 	public void ShowScreenOverlay()
 	{
 		screenOverlay.SetActive(true);
@@ -143,4 +164,6 @@ public class UIManager : MonoBehaviour
 	{
 		screenOverlay.SetActive(false);
 	}
+
+	#endregion
 }

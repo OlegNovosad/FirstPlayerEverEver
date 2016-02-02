@@ -42,7 +42,10 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this);
 		}
+	}
 
+	void Start()
+	{
 		if (SceneManager.GetActiveScene().name == "Level1") 
 		{
 			isFirstLevel = true;
@@ -56,6 +59,15 @@ public class GameManager : MonoBehaviour
 		{
 			// setting the chestOpened to required id depending on the scene
 			chestOpened = 4;
+		}
+
+		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+		{
+			UIManager.instance.ShowDPad();	
+		}
+		else
+		{
+			UIManager.instance.HideDPad();
 		}
 	}
 
