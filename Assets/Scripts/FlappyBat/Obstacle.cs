@@ -10,10 +10,4 @@ public class Obstacle : MonoBehaviour
 	{
 		GetComponent<Rigidbody2D>().velocity = velocity;
 	}
-	
-	// Update is called once per frame
-	void Update()
-	{
-		
-	}
 }
