@@ -10,4 +10,12 @@ public class Obstacle : MonoBehaviour
 	{
 		GetComponent<Rigidbody2D>().velocity = velocity;
 	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Destroyer")
+		{
+			Destroy(gameObject);
+		}
+	}
 }
