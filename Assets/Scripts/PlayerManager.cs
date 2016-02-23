@@ -45,17 +45,17 @@ public class PlayerManager : MonoBehaviour
 		UIManager.instance.UpdateHUD();
 	}
 
-	public void ThrowSpear(GameObject player)
+	public void ThrowSpear()
 	{
+		GameObject player = GameObject.Find("Player");
 		if (hasSpear)
 		{
 			// throw spear
 		}
 		else
 		{
-			GameObject s = Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, 0 - Camera.main.transform.position.z)), Quaternion.Euler(new Vector3(0, 0, 30))) as GameObject;
-			StartCoroutine(Move(s.transform, player.transform, 2f));
-			spears.Add(s);
+			GameObject s = Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, spear.transform.position.z - Camera.main.transform.position.z)), Quaternion.identity) as GameObject;
+			StartCoroutine(s.transform.Move(player.transform.position, 0.1f));
 		}
 	}
 
@@ -66,18 +66,5 @@ public class PlayerManager : MonoBehaviour
 			currentSpear = Instantiate(player.transform.GetChild(0).gameObject);
 			Destroy(player.transform.GetChild(0).gameObject);
 		}
-	}
-
-	private IEnumerator Move(Transform source, Transform target, float duration)
-	{
-		while (Vector3.Distance(source.position, target.position) > 1f)
-		{
-			//Move Player
-			source.Translate(target.position * 2f * Time.deltaTime);
-			yield return null;
-		}
-
-		source.position = target.position;
-		source.SetParent(target);
 	}
 }
