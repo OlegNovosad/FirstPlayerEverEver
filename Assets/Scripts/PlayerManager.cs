@@ -7,18 +7,16 @@ public class PlayerManager : MonoBehaviour
 {
 	public static PlayerManager instance = null;
 
-	public Constants.Skill selectedSkill = Constants.Skill.None;
+	public List<Constants.Skill> selectedSkill = new List<Constants.Skill>() { Constants.Skill.None };
 	public int playerHealths = Constants.MaxPlayerHealth;
 
-	public GameObject spear;
+	public Spear spear;
 
-	public List<GameObject> spears = new List<GameObject>();
+	public List<Spear> spears = new List<Spear>();
 
 	public bool hasKey;
 
 	public bool hasSpear = false;
-
-	public GameObject currentSpear = null;
 
 	public bool hasGarlic = false;
 
@@ -48,22 +46,28 @@ public class PlayerManager : MonoBehaviour
 	public void ThrowSpear()
 	{
 		GameObject player = GameObject.Find("Player");
-		if (hasSpear)
+		if (spears.Count > 0)
 		{
 			// throw spear
+			StartCoroutine(UIManager.instance.ShowTooltipMessageWithDelay("I have to pull it out to throw.", 2f));
+			if (hasSpear)
+			{
+				Instantiate(spear, player.transform.position, Quaternion.identity);
+//				spears.RemoveAt(0);
+			}
 		}
 		else
 		{
-			GameObject s = Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, spear.transform.position.z - Camera.main.transform.position.z)), Quaternion.identity) as GameObject;
-			StartCoroutine(s.transform.Move(player.transform.position, 0.1f));
+			Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, spear.transform.position.z - Camera.main.transform.position.z)), Quaternion.identity);
 		}
 	}
 
-	public void PullOutSpear(GameObject player)
+	public void PullOutSpear()
 	{
-		if (player.transform.childCount > 0)
+		PlayerManager.instance.hasSpear = true;
+		GameObject player = GameObject.Find("Player");
+		if (spears.Count > 0)
 		{
-			currentSpear = Instantiate(player.transform.GetChild(0).gameObject);
 			Destroy(player.transform.GetChild(0).gameObject);
 		}
 	}

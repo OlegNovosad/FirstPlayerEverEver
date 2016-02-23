@@ -63,15 +63,13 @@ public class UIManager : MonoBehaviour
 
 	public void DisplaySkill()
 	{
-		if (PlayerManager.instance.selectedSkill == Constants.Skill.ThrowSpear)
+		if (PlayerManager.instance.selectedSkill.Contains(Constants.Skill.ThrowSpear))
 		{
 			throwSpearButton.gameObject.SetActive(true);
-			pullOutSpearButton.gameObject.SetActive(false);
 		}
 
-		if (PlayerManager.instance.selectedSkill == Constants.Skill.PullOutSpear)
+		if (PlayerManager.instance.selectedSkill.Contains(Constants.Skill.PullOutSpear))
 		{
-			throwSpearButton.gameObject.SetActive(false);
 			pullOutSpearButton.gameObject.SetActive(true);
 		}
 	}
@@ -106,6 +104,14 @@ public class UIManager : MonoBehaviour
 	{
 		tooltipPanel.SetActive(true);
 		tooltipPanelText.text = message;
+	}
+
+	public IEnumerator ShowTooltipMessageWithDelay(string message, float delayTime)
+	{
+		tooltipPanel.SetActive(true);
+		tooltipPanelText.text = message;
+		yield return new WaitForSeconds(delayTime);
+		HideTooltipMessage();
 	}
 
 	/// <summary>

@@ -127,10 +127,13 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Spear":
-				PlayerManager.instance.Damage(3);
-				other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
-				other.gameObject.transform.SetParent(gameObject.transform);
-				PlayerManager.instance.spears.Add(other.gameObject);
+				if (!PlayerManager.instance.hasSpear)
+				{
+					PlayerManager.instance.Damage(3);
+					other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
+					other.gameObject.transform.SetParent(gameObject.transform);
+					PlayerManager.instance.spears.Add(other.gameObject.GetComponent<Spear>());
+				}
 				break;
 			case "Wizard":
 				SoundManager.instance.PlayPlayersSingle (grandpaSound);

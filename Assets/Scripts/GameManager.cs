@@ -151,14 +151,12 @@ public class GameManager : MonoBehaviour
 		switch (choice)
 		{
 			case 0:
-				PlayerManager.instance.selectedSkill = Constants.Skill.ThrowSpear;
+				PlayerManager.instance.selectedSkill.Add(Constants.Skill.ThrowSpear);
 				break;
 			case 1:	
-				PlayerManager.instance.selectedSkill = Constants.Skill.PullOutSpear;
+				PlayerManager.instance.selectedSkill.Add(Constants.Skill.PullOutSpear);
 				break;
-			default: 
-				PlayerManager.instance.selectedSkill = Constants.Skill.None;
-				break;
+			default: break;
 		}
 		UIManager.instance.HideSelectDialogPanel();
 		UIManager.instance.DisplaySkill();
