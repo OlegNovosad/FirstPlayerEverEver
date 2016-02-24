@@ -40,14 +40,23 @@ public class BatController : MonoBehaviour
 	// Die by collision
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Obstacle")
+		switch (other.tag)
 		{
-			Die();
-		}
-		else if (other.gameObject.tag == "Pass")
-		{
-			score++;
-			scoreText.text = "Score: " + score;
+			case "Obstacle":
+				Die();
+			break;
+			case "Pass":
+				score++;
+				scoreText.text = "Score: " + score;
+			break;
+			case "Flower":
+				// TODO: temporary add +10 to score, probably flowers will be counted
+				// in different field.
+				score += 10;
+				scoreText.text = "Score: " + score;
+				Destroy(other.gameObject);
+			break;
+			default: break;
 		}
 	}
 	
