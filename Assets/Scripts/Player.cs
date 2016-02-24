@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     const float ceilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Animator animator;            // Reference to the player's animator component.
-    private bool facingRight = true;  // For determining which way the player is currently facing.
+    public bool facingRight = true;  // For determining which way the player is currently facing.
 
     public Vector3 targetPosition;
 
@@ -127,12 +127,12 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Spear":
-				if (!PlayerManager.instance.hasSpear)
+				if (!PlayerManager.instance.hasSpear && !other.gameObject.GetComponent<Spear>().isThrown)
 				{
 					PlayerManager.instance.Damage(3);
 					other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
 					other.gameObject.transform.SetParent(gameObject.transform);
-					PlayerManager.instance.spears.Add(other.gameObject.GetComponent<Spear>());
+					PlayerManager.instance.spearsInBack.Add(other.gameObject.GetComponent<Spear>());
 				}
 				break;
 			case "Wizard":
