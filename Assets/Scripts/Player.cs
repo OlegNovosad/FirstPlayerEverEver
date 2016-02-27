@@ -40,10 +40,15 @@ public class Player : MonoBehaviour
 	public string[] phrases = {
 		"I wanna poooo..."
 	};
-		
-	private bool hasSpear = false;
 
 	private AudioClip randomMoveSound;
+
+
+    private void Awake()
+    {
+        // Setting up references.
+        animator = GetComponent<Animator>();
+    }
 	
 	//Start overrides the Start function of MovingObject
 	void Start ()
@@ -62,6 +67,32 @@ public class Player : MonoBehaviour
 			return;
 		}
 
+
+		#if UNITY_ANDROID || UNITY_IOS
+
+		if (Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
+			if (touch.phase == TouchPhase.Moved || touch.phase ==  TouchPhase.Stationary)
+			{
+				Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+
+	            if (touchPosition != transform.position)
+	            {
+					animator.SetBool("IsMoving", true);
+					Move(touchPosition);
+	            }
+	            else
+	            {
+					animator.SetBool("IsMoving", false);
+	            }
+            }
+        }
+
+	    #endif
+
+		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
+
 		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
 		horizontal = CnInputManager.GetAxisRaw ("Horizontal");
 		
@@ -79,6 +110,8 @@ public class Player : MonoBehaviour
 		{
 			animator.SetBool("IsMoving", false);
 		}
+
+		#endif
 	}
 
 	//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
@@ -284,13 +317,24 @@ public class Player : MonoBehaviour
 		}
 	}
 
-    private void Awake()
+    private void Move(Vector3 position)
     {
-        // Setting up references.
-        animator = GetComponent<Animator>();
+		// If the input is moving the player right and the player is facing left...
+		if (position.x > transform.position.x && !facingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+		// Otherwise if the input is moving the player left and the player is facing right...
+		else if (position.x < transform.position.x && facingRight)
+        {
+            Flip();
+        }
+
+		transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime);
     }
 
-    public void Move(float hMove, float vMove)
+    private void Move(float hMove, float vMove)
     {
 		targetPosition = new Vector3(hMove, vMove, 0);
 
