@@ -42,7 +42,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -65,16 +65,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -49.5, y: 88.5}
-        - {x: -53.5, y: 85.5}
-        - {x: -53.5, y: -16.5}
-        - {x: -50.5, y: -56.5}
-        - {x: -29.5, y: -88.5}
-        - {x: 38.5, y: -88.5}
-        - {x: 53.5, y: -84.5}
-        - {x: 53.5, y: -20.5}
-        - {x: 48.5, y: 33.5}
-        - {x: 35.5, y: 88.5}
+      - - {x: -26.5, y: 88.5}
+        - {x: -53.5, y: -25.5}
+        - {x: -53.5, y: -69.5}
+        - {x: -36.5, y: -85.5}
+        - {x: -13.5, y: -88.5}
+        - {x: 53.5, y: -88.5}
+        - {x: 53.5, y: 88.5}
     - name: player_1
       rect:
         serializedVersion: 2
@@ -86,14 +83,20 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 42, y: 88}
-        - {x: -49, y: 88}
-        - {x: -51, y: 81}
-        - {x: -51, y: -36}
-        - {x: -38, y: -88}
-        - {x: 51, y: -88}
-        - {x: 51, y: 79}
-        - {x: 49, y: 87}
+      - - {x: 28, y: 88}
+        - {x: 28, y: 78}
+        - {x: 30, y: 58}
+        - {x: -51, y: -14}
+        - {x: -51, y: -88}
+        - {x: 0, y: -88}
+        - {x: 51, y: -68}
+        - {x: 51, y: 88}
+      - - {x: -51, y: 88}
+        - {x: -51, y: 77}
+        - {x: -8, y: 59}
+        - {x: 14, y: 59}
+        - {x: 27, y: 80}
+        - {x: 27, y: 88}
     - name: player_2
       rect:
         serializedVersion: 2
@@ -105,15 +108,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 42, y: 90}
-        - {x: -55, y: 90}
-        - {x: -55, y: -35}
-        - {x: -44, y: -84}
-        - {x: -26, y: -90}
-        - {x: 31, y: -90}
-        - {x: 55, y: -73}
-        - {x: 55, y: -23}
-        - {x: 46, y: 89}
+      - - {x: -55, y: 90}
+        - {x: -55, y: -60}
+        - {x: 55, y: -60}
+        - {x: 55, y: 21}
+        - {x: -15, y: 90}
     - name: player_3
       rect:
         serializedVersion: 2
