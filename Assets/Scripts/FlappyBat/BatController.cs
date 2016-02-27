@@ -22,12 +22,25 @@ public class BatController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		// Jump
-		if (Input.GetKeyUp(KeyCode.Space))
-		{
-			rb2D.velocity = Vector2.zero;
-			rb2D.AddForce(jumpForce);
-		}
+		#if UNITY_ANDROID || UNITY_IOS
+			// Jump
+			if (Input.touchCount > 0)
+			{
+				Touch touch = Input.GetTouch(0);
+				if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+				{
+					Jump();
+				}
+			}
+	    #endif
+
+		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
+			// Jump
+			if (Input.GetKeyUp(KeyCode.Space))
+			{
+				Jump();
+			}
+		#endif
 
 		// Die by being off screen
 		Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -35,6 +48,12 @@ public class BatController : MonoBehaviour
 		{
 			Die();
 		}
+	}
+
+	private void Jump()
+	{
+		rb2D.velocity = Vector2.zero;
+		rb2D.AddForce(jumpForce);
 	}
 	
 	// Die by collision

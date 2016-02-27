@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 
 	private AudioClip randomMoveSound;
 
-
     private void Awake()
     {
         // Setting up references.
