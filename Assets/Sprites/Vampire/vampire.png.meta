@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: c6b0bb342288f4dd5ab4551de6daa1ed
+timeCreated: 1456611760
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: vampire_0
+    21300002: vampire_1
+    21300004: vampire_2
+    21300006: vampire_3
+    21300008: vampire_4
+    21300010: vampire_5
+    21300012: vampire_6
+    21300014: vampire_7
+    21300016: vampire_8
+    21300018: vampire_9
+    21300020: vampire_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: vampire_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 110
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 56}
+        - {x: -55, y: -19}
+        - {x: -55, y: -56}
+        - {x: -20, y: -56}
+        - {x: -6, y: -48}
+        - {x: 55, y: 3}
+        - {x: 55, y: 56}
+    - name: vampire_1
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 100
+        width: 51
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25.5, y: 57.5}
+        - {x: -25.5, y: -52.5}
+        - {x: -18.5, y: -57.5}
+        - {x: 25.5, y: -57.5}
+        - {x: 25.5, y: 38.5}
+        - {x: 19.5, y: 57.5}
+    - name: vampire_2
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 116
+        width: 29
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: vampire_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 114
+        width: 28
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: vampire_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 79
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23.5, y: 49}
+        - {x: -39.5, y: 35}
+        - {x: -39.5, y: -38}
+        - {x: -32.5, y: -49}
+        - {x: 24.5, y: -49}
+        - {x: 39.5, y: -11}
+        - {x: 39.5, y: 42}
+        - {x: 18.5, y: 49}
+    - name: vampire_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 38
+        width: 62
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 28}
+        - {x: -31, y: -19}
+        - {x: 3, y: -28}
+        - {x: 31, y: -28}
+        - {x: 31, y: 2}
+        - {x: -22, y: 28}
+    - name: vampire_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 14
+        width: 49
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 38.5}
+        - {x: -24.5, y: 33.5}
+        - {x: -24.5, y: 2.5}
+        - {x: -0.5, y: -38.5}
+        - {x: 21.5, y: -38.5}
+        - {x: 24.5, y: -37.5}
+        - {x: 24.5, y: -8.5}
+        - {x: -10.5, y: 38.5}
+    - name: vampire_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 9
+        width: 13
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: vampire_8
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 10
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: vampire_9
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 0
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: vampire_10
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 3
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
