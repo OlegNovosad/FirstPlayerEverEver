@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
 
 	[SerializeField] private float maxSpeed = 2f;                    // The fastest the player can travel in the x axis.
 
-    const float ceilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Animator animator;            // Reference to the player's animator component.
     public bool facingRight = true;  // For determining which way the player is currently facing.
 
