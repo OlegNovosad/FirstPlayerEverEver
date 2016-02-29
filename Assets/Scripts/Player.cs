@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 	public GameObject [] level4Walls;
 	public GameObject garlic;
 
-	public float flowersNumber = Constants.FlowersCount; // magic number
+	public float questFlowers;
 
 	private bool phraseUsed;
 
@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		targetPosition = transform.position;
 
+		questFlowers = GameObject.FindGameObjectsWithTag("QuestFlower").Length;
 		randomMoveSound = moveSounds[Random.Range(0, moveSounds.Length)];
 	}
 
@@ -124,19 +125,22 @@ public class Player : MonoBehaviour
 				StartCoroutine(GameManager.instance.GameOver());
 				break;
 			case "Flower":
-				UIManager.instance.ShowTooltipMessage(Constants.FlowerMessage);
+				Destroy(other.gameObject);
+				StartCoroutine(UIManager.instance.ShowTooltipMessageWithDelay(Constants.FlowerMessage, 2f));
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
+				SoundManager.instance.PlayOtherSingle(collectSound);
+				PlayerManager.instance.AddFlower(1);
 				break;
 			case "Fire":
 				UIManager.instance.ShowTooltipMessage(Constants.FireMessage);
 				SoundManager.instance.PlayPlayersSingle(mmmSound);
 				break;
 			case "QuestFlower":
-				flowersNumber--;
+				questFlowers--;
 				Destroy(other.gameObject);
-				SoundManager.instance.PlayPlayersSingle(collectSound);
+				SoundManager.instance.PlayOtherSingle(collectSound);
 
-				if (flowersNumber <= 0)
+				if (questFlowers <= 0)
 				{
 					GameManager.instance.questState = Constants.QuestState.Done;
 				}
@@ -166,7 +170,7 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Wizard":
-				SoundManager.instance.PlayPlayersSingle (grandpaSound);
+				SoundManager.instance.PlayOldman();
 				if (GameManager.instance.isFirstLevel) 
 				{
 					UIManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);

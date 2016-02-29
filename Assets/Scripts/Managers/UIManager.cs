@@ -29,8 +29,6 @@ public class UIManager : MonoBehaviour
 	public Image garlic;
 	public Image garlicHUD;
 
-	public GameObject joystick;
-
 	void Awake()
 	{
 		if (instance == null)
@@ -50,16 +48,6 @@ public class UIManager : MonoBehaviour
 	}
 
 	#region HUD Managing
-
-	public void ShowJoystick()
-	{
-		joystick.SetActive(true);
-	}
-
-	public void HideJoystick()
-	{
-		joystick.SetActive(false);
-	}
 
 	public void DisplaySkill()
 	{

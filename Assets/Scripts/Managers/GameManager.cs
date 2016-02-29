@@ -46,12 +46,13 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
+		// TODO: Rework this part when all levels will be implemented.
 		if (SceneManager.GetActiveScene().name == "Level1") 
 		{
 			isFirstLevel = true;
 			UIManager.instance.ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
 		}
-		else if (SceneManager.GetActiveScene().name == "Level5") 
+		else if (SceneManager.GetActiveScene().name == "Level6") 
 		{
 			isLastLevel = true;
 		} 
@@ -59,15 +60,6 @@ public class GameManager : MonoBehaviour
 		{
 			// setting the chestOpened to required id depending on the scene
 			chestOpened = 4;
-		}
-
-		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-		{
-			UIManager.instance.ShowJoystick();	
-		}
-		else
-		{
-			UIManager.instance.HideJoystick();
 		}
 	}
 
@@ -99,7 +91,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private void InitVampire(Vector3 batPosition)
+	public void InitVampire(Vector3 batPosition)
 	{
 		vampire = Instantiate(vampire, batPosition, Quaternion.identity) as GameObject;
 		SoundManager.instance.PlayPlayersSingle(intovampire);

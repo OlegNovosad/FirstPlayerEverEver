@@ -15,12 +15,12 @@ public class PlayerManager : MonoBehaviour
 	public List<Spear> spearsInBack = new List<Spear>();
 
 	public bool hasKey;
-
 	public bool hasSpear = false;
-
 	public bool hasGarlic = false;
 
 	public Player player;
+
+	public int flowersCollected = 0;
 
 	void Awake()
 	{
@@ -85,5 +85,10 @@ public class PlayerManager : MonoBehaviour
 			Destroy(player.transform.GetChild(0).gameObject);
 			spearsInBack.RemoveAt(0);
 		}
+	}
+
+	public void AddFlower(int amount) 
+	{
+		flowersCollected += amount;
 	}
 }
