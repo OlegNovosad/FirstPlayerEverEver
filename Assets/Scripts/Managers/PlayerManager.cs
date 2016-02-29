@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
 
 	public bool hasGarlic = false;
 
-	private Player player;
+	public Player player;
 
 	void Awake()
 	{

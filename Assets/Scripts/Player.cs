@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using CnControls;
 
 public class Player : MonoBehaviour 
 {
@@ -92,10 +91,10 @@ public class Player : MonoBehaviour
 		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
 
 		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-		horizontal = CnInputManager.GetAxisRaw ("Horizontal");
+		horizontal = Input.GetAxisRaw ("Horizontal");
 		
 		//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-		vertical = CnInputManager.GetAxisRaw ("Vertical");
+		vertical = Input.GetAxisRaw ("Vertical");
 
 		//Check if we have a non-zero value for horizontal or vertical
 		if (horizontal != 0 || vertical != 0)

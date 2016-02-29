@@ -3,16 +3,16 @@ using System.Collections;
 
 public class Spear : MonoBehaviour 
 {
-	private Player player;
 	private Vector3 velocity = Vector3.zero;
 	public float speed;
 	private Vector3 direction;
 
 	public bool isThrown = false;
+	private Player player;
 
 	void Start()
 	{
-		player = GameObject.Find("Player").GetComponent<Player>();
+		player = PlayerManager.instance.player;
 
 		if (player.facingRight)
 		{

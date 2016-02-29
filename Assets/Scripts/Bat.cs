@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Bat : MonoBehaviour 
 {
-	private GameObject player;
+	private Player player;
 
 	private Vector3 velocity = Vector3.zero;
 
 	void Start()
 	{
-		player = GameObject.Find("Player");
+		player = PlayerManager.instance.player;
 	}
 	
 	// Update is called once per frame
