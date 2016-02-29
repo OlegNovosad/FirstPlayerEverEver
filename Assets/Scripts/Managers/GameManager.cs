@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 	private float timeLeft = 42; // equal to hp number
 
 	public int chestOpened = 0;
-	public int batHP = 30;
 	public int vampireHP = 30;
 
 	public bool isFirstLevel;
@@ -70,24 +69,6 @@ public class GameManager : MonoBehaviour
 			timeLeft -= Time.deltaTime;
 			PlayerManager.instance.Damage(PlayerManager.instance.playerHealths - (int) timeLeft);
 			SoundManager.instance.PlayPlayersSingle(hurtSound);
-		}
-	}
-
-	/// <summary>
-	/// Damages the bat.
-	/// </summary>
-	/// <param name="value">Value.</param>
-	public void DamageBat(int value)
-	{
-		batHP -= value;
-		SoundManager.instance.PlayPlayersSingle(batSqueak);
-
-		if (batHP <= 0)
-		{
-			Vector3 batPosition = bat.transform.position;
-			Destroy(bat);
-
-			InitVampire(batPosition);
 		}
 	}
 

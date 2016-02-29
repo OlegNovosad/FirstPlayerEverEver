@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 	public AudioClip manGetTired;
 	public AudioClip collectSound;
 	public AudioClip grandpaSound;
-	public AudioClip cipo4kaSound;
+	public AudioClip princessSound;
 
 	public Sprite spikeOff;
 	public Sprite spikeOn;
@@ -39,23 +39,15 @@ public class Player : MonoBehaviour
 		"I wanna poooo..."
 	};
 
-	private AudioClip randomMoveSound;
-
     private void Awake()
     {
-        // Setting up references.
         animator = GetComponent<Animator>();
     }
 	
-	//Start overrides the Start function of MovingObject
 	void Start ()
 	{
-		//Get a component reference to the Player's animator component
-		animator = GetComponent<Animator>();
 		targetPosition = transform.position;
-
 		questFlowers = GameObject.FindGameObjectsWithTag("QuestFlower").Length;
-		randomMoveSound = moveSounds[Random.Range(0, moveSounds.Length)];
 	}
 
 	private void Update ()
@@ -91,18 +83,14 @@ public class Player : MonoBehaviour
 
 		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
 
-		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
 		horizontal = Input.GetAxisRaw ("Horizontal");
-		
-		//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
 		vertical = Input.GetAxisRaw ("Vertical");
 
-		//Check if we have a non-zero value for horizontal or vertical
 		if (horizontal != 0 || vertical != 0)
 		{
 			animator.SetBool("IsMoving", true);
 			Move(horizontal, vertical);
-			SoundManager.instance.RandomizeSfx(randomMoveSound);
+			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
 		}
 		else
 		{
@@ -112,7 +100,6 @@ public class Player : MonoBehaviour
 		#endif
 	}
 
-	//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		switch (other.tag)
@@ -186,32 +173,24 @@ public class Player : MonoBehaviour
 				}
 				else 
 				{
-					if (GameManager.instance.questState == Constants.QuestState.Done)
+					switch (GameManager.instance.questState)
 					{
-						UIManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
-						for (int i = 0; i < level2Walls.Length; i++) {
-							Destroy (level2Walls[i]);
-						}
-						return;
-					}
-
-					if (GameManager.instance.questState == Constants.QuestState.None) 
-					{
-						GameManager.instance.questState = Constants.QuestState.Started;
-						UIManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
-						return;
-					}
-
-					if (GameManager.instance.questState == Constants.QuestState.Started) 
-					{
-						UIManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
-						return;
-					}
-
-					if (GameManager.instance.questState == Constants.QuestState.InProgress) 
-					{
-						UIManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
-						return;
+						case Constants.QuestState.Done:
+							UIManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
+							for (int i = 0; i < level2Walls.Length; i++) {
+								Destroy (level2Walls[i]);
+							}
+						break;
+						case Constants.QuestState.None:
+							GameManager.instance.questState = Constants.QuestState.Started;
+							UIManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
+						break;
+						case Constants.QuestState.Started:
+							UIManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
+						break;
+						case Constants.QuestState.InProgress:
+							UIManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
+						break;
 					}
 				}
 				break;
@@ -249,20 +228,6 @@ public class Player : MonoBehaviour
 			break;
 			case "Bat":
 				PlayerManager.instance.Damage(3);
-
-				if (PlayerManager.instance.hasSpear)
-				{
-					GameManager.instance.DamageBat(10);
-				}
-				else
-				{
-					GameManager.instance.DamageBat(5);
-				}
-				
-				if (other != null)
-				{
-					StartCoroutine(RestartTrigger(other));
-				}
 				break;
 			case "Vampire":
 				if (PlayerManager.instance.hasGarlic)
@@ -279,7 +244,7 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Princess":
-				SoundManager.instance.PlayPlayersSingle (cipo4kaSound);
+				SoundManager.instance.PlayPlayersSingle (princessSound);
 				UIManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
 				GameObject.Find("princess").GetComponent<SpriteRenderer>().sprite = vampire;
 				break;
@@ -292,14 +257,6 @@ public class Player : MonoBehaviour
 				break;
 			default: break;
 		}
-	}
-
-	IEnumerator RestartTrigger(Collider2D other)
-	{
-		yield return new WaitForSeconds(0.2f);
-		other.isTrigger = false;
-		yield return new WaitForSeconds(0.2f);
-		other.isTrigger = true;
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
@@ -318,6 +275,10 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Move to the specified position.
+	/// </summary>
+	/// <param name="position">Position.</param>
     private void Move(Vector3 position)
     {
 		// If the input is moving the player right and the player is facing left...
@@ -335,6 +296,11 @@ public class Player : MonoBehaviour
 		transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime);
     }
 
+    /// <summary>
+    /// Move to new target position based on the specified hMove and vMove.
+    /// </summary>
+    /// <param name="hMove">H move.</param>
+    /// <param name="vMove">V move.</param>
     private void Move(float hMove, float vMove)
     {
 		targetPosition = new Vector3(hMove, vMove, 0);
@@ -367,10 +333,5 @@ public class Player : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }
-
-    void OnDrawGizmos()
-    {
-		Gizmos.DrawLine(transform.position, transform.position + targetPosition);
     }
 }

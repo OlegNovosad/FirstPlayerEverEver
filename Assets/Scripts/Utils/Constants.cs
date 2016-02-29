@@ -29,5 +29,4 @@ public class Constants
 	}
 
 	public const int MaxPlayerHealth = 42;
-	public const int FlowersCount = 17;
 }

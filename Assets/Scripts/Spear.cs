@@ -57,6 +57,7 @@ public class Spear : MonoBehaviour
 			case "Bat":
 				if (isThrown)
 				{
+					GameManager.instance.InitVampire(other.gameObject.transform.position);
 					Destroy(other.gameObject);
 					Destroy(gameObject);
 				}
