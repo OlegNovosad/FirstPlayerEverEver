@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 17ee9a1f10a684708bdc296f81dd0ca9
-timeCreated: 1453608753
+timeCreated: 1457856018
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -46,7 +46,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -57,38 +57,39 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 100
-        height: 58
+        width: 163
+        height: 105
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -29, y: 29}
-        - {x: -50, y: 15}
-        - {x: -50, y: -29}
-        - {x: 39, y: -29}
-        - {x: 50, y: -25}
-        - {x: 50, y: 26}
-        - {x: 48, y: 29}
+      - - {x: -40.5, y: 52.5}
+        - {x: -81.5, y: 16.5}
+        - {x: -81.5, y: -47.5}
+        - {x: -69.5, y: -52.5}
+        - {x: -62.5, y: -52.5}
+        - {x: -48.5, y: -21.5}
+        - {x: -28.5, y: -52.5}
+        - {x: 71.5, y: -52.5}
+        - {x: 81.5, y: 13.5}
+        - {x: 81.5, y: 52.5}
     - name: chest_1
       rect:
         serializedVersion: 2
-        x: 119
-        y: 0
-        width: 100
-        height: 75
+        x: 164
+        y: 1
+        width: 104
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -34, y: 37.5}
-        - {x: -48, y: 33.5}
-        - {x: -50, y: 26.5}
-        - {x: -50, y: -37.5}
-        - {x: 43, y: -37.5}
-        - {x: 50, y: -36.5}
-        - {x: 50, y: 30.5}
-        - {x: 37, y: 37.5}
+      - - {x: -45, y: 58}
+        - {x: -52, y: 43}
+        - {x: -52, y: -58}
+        - {x: 51, y: -58}
+        - {x: 52, y: -55}
+        - {x: 52, y: 58}
     outline: []
   spritePackingTag: 
   userData: 

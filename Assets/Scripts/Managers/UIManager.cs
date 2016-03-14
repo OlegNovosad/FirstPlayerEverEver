@@ -22,12 +22,9 @@ public class UIManager : MonoBehaviour
 
 	// Ocasional items
 	public GameObject screenOverlay;
-	public Image key;
 
-	public Image stake;
-	public Image crusifix;
-	public Image garlic;
-	public Image garlicHUD;
+	public Image questHUD;
+
 
 	void Awake()
 	{
@@ -154,18 +151,18 @@ public class UIManager : MonoBehaviour
 	{
 		switch (item)
 		{
-			case Constants.Item.Stake:
-				stake.gameObject.SetActive(true);
-			break;
-			case Constants.Item.Crusifix:
-				stake.gameObject.SetActive(false);
-				crusifix.gameObject.SetActive(true);
-			break;
-			case Constants.Item.Garlic:
-				crusifix.gameObject.SetActive(false);
-				garlic.gameObject.SetActive(true);
-				garlicHUD.gameObject.SetActive(true);
-			break;
+//			case Constants.Item.Stake:
+//				stake.gameObject.SetActive(true);
+//			break;
+//			case Constants.Item.Crusifix:
+//				stake.gameObject.SetActive(false);
+//				crusifix.gameObject.SetActive(true);
+//			break;
+//			case Constants.Item.Garlic:
+//				crusifix.gameObject.SetActive(false);
+//				garlic.gameObject.SetActive(true);
+//				garlicHUD.gameObject.SetActive(true);
+//			break;
 		}
 	}
 
@@ -181,6 +178,12 @@ public class UIManager : MonoBehaviour
 	public void HideScreenOverlay()
 	{
 		screenOverlay.SetActive(false);
+	}
+
+	//TODO: check this and set the ed color if player gets hit.
+	public void SetScreenOverlayColor(Color color){
+		screenOverlay.GetComponent<Image>().color = color;
+
 	}
 
 	#endregion

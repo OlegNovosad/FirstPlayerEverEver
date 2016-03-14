@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8d54ce097802b429eb700df330a5052e
-timeCreated: 1453919235
+timeCreated: 1457800784
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -57,57 +57,20 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 158
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 79, y: 25.5}
-        - {x: 73, y: 39.5}
-        - {x: -66, y: 39.5}
-        - {x: -79, y: 31.5}
-        - {x: -79, y: -26.5}
-        - {x: -63, y: -39.5}
-        - {x: -52, y: -39.5}
-        - {x: -52, y: -21.5}
-        - {x: -39, y: -39.5}
-        - {x: 79, y: -39.5}
-    - name: bat_1
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 94
-        width: 159
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -79.5, y: 39.5}
-        - {x: -79.5, y: -39.5}
-        - {x: 79.5, y: -39.5}
-        - {x: 79.5, y: 39.5}
-    - name: bat_2
-      rect:
-        serializedVersion: 2
-        x: 7
         y: 0
-        width: 158
-        height: 79
+        width: 224
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -69, y: 39.5}
-        - {x: -79, y: 31.5}
-        - {x: -79, y: -23.5}
-        - {x: -72, y: -39.5}
-        - {x: 68, y: -39.5}
-        - {x: 79, y: -31.5}
-        - {x: 79, y: 24.5}
-        - {x: 72, y: 39.5}
+      - - {x: -110, y: 62.5}
+        - {x: -112, y: 52.5}
+        - {x: -112, y: 8.5}
+        - {x: -25, y: -62.5}
+        - {x: 51, y: -62.5}
+        - {x: 112, y: -30.5}
+        - {x: 112, y: 62.5}
     outline: []
   spritePackingTag: 
   userData: 

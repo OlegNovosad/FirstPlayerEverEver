@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f1b30691c2d2741fdbe0a3f1bbfbf5f4
-timeCreated: 1453921600
+timeCreated: 1457875386
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -56,32 +56,47 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 227
-        width: 198
-        height: 199
+        y: 0
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -99, y: 99.5}
-        - {x: -99, y: -99.5}
-        - {x: 99, y: -99.5}
-        - {x: 99, y: 99.5}
+      - - {x: -100, y: 100}
+        - {x: -100, y: -100}
+        - {x: 100, y: -100}
+        - {x: 100, y: 100}
     - name: spikes_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 230
         y: 0
-        width: 198
-        height: 199
+        width: 200
+        height: 268
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -99, y: 99.5}
-        - {x: -99, y: -99.5}
-        - {x: 99, y: -99.5}
-        - {x: 99, y: 99.5}
+      - - {x: 78, y: 134}
+        - {x: 43, y: 134}
+        - {x: 35, y: 115}
+        - {x: 14, y: 130}
+        - {x: 6, y: 118}
+        - {x: -19, y: 134}
+        - {x: -31, y: 134}
+        - {x: -32, y: 132}
+        - {x: -60, y: 128}
+        - {x: -71, y: 134}
+        - {x: -83, y: 134}
+        - {x: -83, y: 133}
+        - {x: -91, y: 86}
+        - {x: -92, y: 75}
+        - {x: -100, y: 68}
+        - {x: -100, y: -134}
+        - {x: 100, y: -134}
+        - {x: 100, y: 71}
+        - {x: 85, y: 130}
     outline: []
   spritePackingTag: 
   userData: 

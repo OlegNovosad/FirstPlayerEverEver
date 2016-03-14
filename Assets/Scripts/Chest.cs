@@ -46,6 +46,7 @@ public class Chest : MonoBehaviour
 			case 6:
 				UIManager.instance.ShowModalDialogPanel ("What a smelly chest. May be this will help", "Yummy!");
 				UIManager.instance.ShowItem(Constants.Item.Garlic);
+			//TODO: enable the quest icon on top
 				PlayerManager.instance.hasGarlic = true;
 				break;
 			default: break;
