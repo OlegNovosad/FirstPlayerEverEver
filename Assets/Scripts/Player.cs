@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 		{
 			animator.SetBool("IsMoving", true);
 			Move(horizontal, vertical);
-			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
+//			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
 		}
 		else
 		{
@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
 					{
 						Destroy (level3Walls[i]);
 					}
-					GameObject.Find("/Canvas/HUD/KeyImage").SetActive(false);
+					GameObject.Find("/Canvas/HUD/KeyImage").SetActive(false); //FIXME: change this to reference GO in the class
 				} 
 				else 
 				{
