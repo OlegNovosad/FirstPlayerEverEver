@@ -126,18 +126,23 @@ public class GameManager : MonoBehaviour
 	/// <param name="choice">Choice of the skill.</param>
 	public void SelectSkill(int choice)
 	{
-		switch (choice)
+        UIManager.instance.HideSelectDialogPanel();
+        switch (choice)
 		{
 			case 0:
 				PlayerManager.instance.selectedSkill.Add(Constants.Skill.ThrowSpear);
-				break;
+                PlayerManager.instance.ThrowSpear();
+                UIManager.instance.DisplaySkill();
+                UIManager.instance.ShowModalDialogPanel("You are not the throwing one, but the spear you need is done!", "Next time I will make you run!");
+                break;
 			case 1:	
 				PlayerManager.instance.selectedSkill.Add(Constants.Skill.PullOutSpear);
-				break;
+                UIManager.instance.DisplaySkill();
+                UIManager.instance.ShowModalDialogPanel("What a choice, without doubt. Just find spear and pull it out!", "Go away and scream out loud...");
+                break;
 			default: break;
 		}
-		UIManager.instance.HideSelectDialogPanel();
-		UIManager.instance.DisplaySkill();
+				
 	}
 
 	public void StartPoisoning()

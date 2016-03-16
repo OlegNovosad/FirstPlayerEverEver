@@ -12,7 +12,8 @@ public class PlayerManager : MonoBehaviour
 
 	public Spear spear;
 
-	public List<Spear> spearsInBack = new List<Spear>();
+    public bool spearPiercedPlayer = false;
+    public List<Spear> spearsInBack = new List<Spear>();
 
 	public bool hasKey;
 	public bool hasSpear = false;
@@ -73,16 +74,22 @@ public class PlayerManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Pulls the out spear. Will change throw spear ability usage.
+	/// Pulls out spear. Will change throw spear ability usage.
 	/// </summary>
 	public void PullOutSpear()
 	{
+        //Case 1: Spear is in the back 
 		if (spearsInBack.Count > 0)
 		{
 			hasSpear = true;
 			Destroy(player.transform.GetChild(0).gameObject);
 			spearsInBack.RemoveAt(0);
+            //
+
 		}
+
+        //Case 2: Player is standing on the Spear (contact) and can pull it out:
+    //    if (PlayerManager.instance.player.)
 	}
 
 	public void AddFlower(int amount) 

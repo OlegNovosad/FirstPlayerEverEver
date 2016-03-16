@@ -51,7 +51,7 @@ public class Spear : MonoBehaviour
 			case "Wall":
 				if (isThrown)
 				{
-					Destroy(gameObject);
+					//TODO: stuck it in the wall
 				}
 			break;
 			case "Bat":
@@ -59,8 +59,8 @@ public class Spear : MonoBehaviour
 				{
 					GameManager.instance.InitVampire(other.gameObject.transform.position);
 					Destroy(other.gameObject);
-					Destroy(gameObject);
-				}
+					Destroy(gameObject); //TODO: stuck it non the place of the vampire!
+                }
 			break;
 			default: break;
 		}

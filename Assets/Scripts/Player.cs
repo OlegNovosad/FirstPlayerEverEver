@@ -30,9 +30,10 @@ public class Player : MonoBehaviour
 
 	public float questFlowers;
 
-	private bool phraseUsed;
-
-	public Sprite vampire;
+	private bool phraseUsed; //FIXME: review this thing prior to release
+    public bool contactsWithSpear;
+    
+    public Sprite vampire;
 	public Sprite princess;
 
 	public string[] phrases = {
@@ -148,9 +149,16 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Spear":
-				if (!PlayerManager.instance.hasSpear && !other.gameObject.GetComponent<Spear>().isThrown)
+                //If player is not pierced with spear - this contact is because spear is stuck somewhere.
+                if (!PlayerManager.instance.spearPiercedPlayer)
+                {
+                    contactsWithSpear = true;
+                    UIManager.instance.ShowTooltipMessage("Boobaraka is strong! He can pull it out!");
+                }
+                //If he has no spear and it is thrown - the Quest 2 and possibly other levels.
+                if (!PlayerManager.instance.hasSpear && !other.gameObject.GetComponent<Spear>().isThrown)
 				{
-					PlayerManager.instance.Damage(3);
+                    PlayerManager.instance.Damage(3);
 					other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
 					other.gameObject.transform.SetParent(gameObject.transform);
 					PlayerManager.instance.spearsInBack.Add(other.gameObject.GetComponent<Spear>());
@@ -239,8 +247,7 @@ public class Player : MonoBehaviour
 				}
 				else
 				{
-					// TODO: Set conditions in game design on how much and when the vampire hurts player.
-					PlayerManager.instance.Damage(6);
+					PlayerManager.instance.Damage(3);
 				}
 				break;
 			case "Princess":
@@ -255,7 +262,7 @@ public class Player : MonoBehaviour
 				Tablet tablet = other.GetComponent<Tablet>();
 				UIManager.instance.ShowTooltipMessage(tablet.setTabletMessage());
 				break;
-			default: break;
+            default: break;
 		}
 	}
 
@@ -271,7 +278,11 @@ public class Player : MonoBehaviour
 			case "Tablet":
 				UIManager.instance.HideTooltipMessage();
 				break;
-			default: break;
+            case "Spear":
+                contactsWithSpear = false;
+                UIManager.instance.HideTooltipMessage();
+                break;
+            default: break;
 		}
 	}
 
