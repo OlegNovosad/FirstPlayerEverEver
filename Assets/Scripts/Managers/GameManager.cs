@@ -45,8 +45,13 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
-		// TODO: Rework this part when all levels will be implemented.
-		if (SceneManager.GetActiveScene().name == "Level1") 
+        //Update the player reference in player manager on each scene on the load.
+        //TODO: may need to change this to reference player on each level by putting him in the insector if there will be performance problems:
+        PlayerManager.instance.player = GameObject.Find("Player").GetComponent<Player>(); 
+        
+        
+        // TODO: Rework this part when all levels will be implemented.
+        if (SceneManager.GetActiveScene().name == "Level1") 
 		{
 			isFirstLevel = true;
 			UIManager.instance.ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);

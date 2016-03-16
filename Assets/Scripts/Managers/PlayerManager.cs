@@ -35,8 +35,6 @@ public class PlayerManager : MonoBehaviour
 
 		DontDestroyOnLoad(this);
 
-		player = GameObject.Find("Player").GetComponent<Player>();
-
 		hasKey = false;
 	}
 

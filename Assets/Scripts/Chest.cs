@@ -52,6 +52,5 @@ public class Chest : MonoBehaviour
 			default: break;
 		}
 		GameManager.instance.chestOpened++;
-		Debug.Log (GameManager.instance.chestOpened);
 	}
 }
