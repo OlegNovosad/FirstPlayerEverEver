@@ -167,9 +167,11 @@ public class Player : MonoBehaviour
 					PlayerManager.instance.spearsInBack.Add(other.gameObject.GetComponent<Spear>());
 					PlayerManager.instance.spearPiercedPlayer = true;
 				}
-				//Set the HUD button to Pull Out state:
-					UIManager.instance.throwSpearButton.gameObject.SetActive (false);
-					UIManager.instance.pullOutSpearButton.gameObject.SetActive (true);
+                //Set the HUD button to Pull Out state TEMPORARY!!!!! remove after finished with the spear throwing:
+
+                    UIManager.instance.throwSpearButton.gameObject.SetActive(false);
+                    UIManager.instance.pullOutSpearButton.gameObject.SetActive(true);
+
 				break;
 			case "Wizard":
 				SoundManager.instance.PlayOldman();

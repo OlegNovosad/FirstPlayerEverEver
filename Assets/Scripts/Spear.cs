@@ -14,7 +14,7 @@ public class Spear : MonoBehaviour
 	{
 		player = PlayerManager.instance.player;
 
-		if (player.facingRight)
+		if (PlayerManager.instance.player.facingRight)
 		{
 			direction = Vector3.right;
 		}

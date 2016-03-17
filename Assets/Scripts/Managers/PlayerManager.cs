@@ -10,8 +10,6 @@ public class PlayerManager : MonoBehaviour
 	public List<Constants.Skill> selectedSkill = new List<Constants.Skill>() { Constants.Skill.None };
 	public int playerHealths = Constants.MaxPlayerHealth;
 
-	public Spear spear;
-
     public bool spearPiercedPlayer = false;
     public List<Spear> spearsInBack = new List<Spear>();
 
@@ -56,16 +54,15 @@ public class PlayerManager : MonoBehaviour
 		UIManager.instance.pullOutSpearButton.gameObject.SetActive (true);
 		if (hasSpear)
 		{
-			Spear s = Instantiate(spear, player.transform.position, Quaternion.identity) as Spear;
-			s.isThrown = true;
+			PlayerManager.instance.player.contactedSpear.isThrown = true;
 			hasSpear = false;
 			//TODO: throwing animation here.
 			return;
 		}
 		else 
 		{
-			if (spearsInBack.Count > 0) //(TODO rework the spearsInBack)
-			{
+			if (spearPiercedPlayer)
+            {
 				StartCoroutine(UIManager.instance.ShowTooltipMessageWithDelay("I have to pull it out to throw.", 2f)); //TODO: review text
 			}
 			else //no spear in the back
@@ -81,23 +78,24 @@ public class PlayerManager : MonoBehaviour
 	/// </summary>
 	public void PullOutSpear()
 	{
-		//Case 1: Spear is in the back (TODO rework the spearsInBack)
-		if (spearsInBack.Count > 0) {
+		//Case 1: Spear is in the back
+		if (spearPiercedPlayer) {
 			//TODO Pull out from the back animation
 			spearsInBack.RemoveAt (0);
-		}
+            hasSpear = true;
+        }
         //Case 2: Player is standing on the Spear (contact) and can pull it out:
 		else if (PlayerManager.instance.player.contactsWithSpear) {
-			//TODO PullOut simple animation 
-			PlayerManager.instance.player.contactedSpear.transform.SetParent(PlayerManager.instance.player.transform);
-		}
-		hasSpear = true;
-//		Destroy (player.transform.GetChild (0).gameObject);
-
-		//changing button to ThrowSpear.
-		UIManager.instance.throwSpearButton.gameObject.SetActive (true);
-		UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);
-	}
+            //TODO PullOut simple animation 
+            PlayerManager.instance.player.contactedSpear.transform.SetParent(PlayerManager.instance.player.transform);
+            hasSpear = true;
+        }
+        //changing button to ThrowSpear.
+        if (hasSpear) { 
+		    UIManager.instance.throwSpearButton.gameObject.SetActive (true);
+		    UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);
+        }
+    }
 
 	public void AddFlower(int amount) 
 	{
