@@ -52,23 +52,26 @@ public class PlayerManager : MonoBehaviour
 	/// </summary>
 	public void ThrowSpear()
 	{
+		UIManager.instance.throwSpearButton.gameObject.SetActive (false);
+		UIManager.instance.pullOutSpearButton.gameObject.SetActive (true);
 		if (hasSpear)
 		{
 			Spear s = Instantiate(spear, player.transform.position, Quaternion.identity) as Spear;
 			s.isThrown = true;
 			hasSpear = false;
+			//TODO: throwing animation here.
 			return;
 		}
-		else
+		else 
 		{
-			if (spearsInBack.Count > 0)
+			if (spearsInBack.Count > 0) //(TODO rework the spearsInBack)
 			{
-				// throw spear
-				StartCoroutine(UIManager.instance.ShowTooltipMessageWithDelay("I have to pull it out to throw.", 2f));
+				StartCoroutine(UIManager.instance.ShowTooltipMessageWithDelay("I have to pull it out to throw.", 2f)); //TODO: review text
 			}
-			else
+			else //no spear in the back
 			{
-				Instantiate(spear, Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0 + Camera.main.transform.position.y * 2, spear.transform.position.z - Camera.main.transform.position.z)), Quaternion.identity);	
+				UIManager.instance.ShowTooltipMessageWithDelay("I need to find a spear.", 2f); //TODO: review text
+				//Instantiate (spear, Camera.main.ScreenToWorldPoint (new Vector3 (0.0f, 0 + Camera.main.transform.position.y * 2, spear.transform.position.z - Camera.main.transform.position.z)), Quaternion.identity);
 			}
 		}
 	}
@@ -78,18 +81,20 @@ public class PlayerManager : MonoBehaviour
 	/// </summary>
 	public void PullOutSpear()
 	{
-        //Case 1: Spear is in the back 
-		if (spearsInBack.Count > 0)
-		{
-			hasSpear = true;
-			Destroy(player.transform.GetChild(0).gameObject);
-			spearsInBack.RemoveAt(0);
-            //
-
+		//Case 1: Spear is in the back (TODO rework the spearsInBack)
+		if (spearsInBack.Count > 0) {
+			//TODO Pull out from the back animation
 		}
-
         //Case 2: Player is standing on the Spear (contact) and can pull it out:
-    //    if (PlayerManager.instance.player.)
+		else if (PlayerManager.instance.player.contactsWithSpear) {
+			//TODO PullOut simple animation 
+		}
+		hasSpear = true;
+//		Destroy (player.transform.GetChild (0).gameObject);
+		spearsInBack.RemoveAt (0);
+		//changing button to ThrowSpear.
+		UIManager.instance.throwSpearButton.gameObject.SetActive (true);
+		UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);
 	}
 
 	public void AddFlower(int amount) 

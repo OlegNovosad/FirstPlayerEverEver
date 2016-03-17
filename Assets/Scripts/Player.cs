@@ -153,6 +153,7 @@ public class Player : MonoBehaviour
                 if (!PlayerManager.instance.spearPiercedPlayer)
                 {
                     contactsWithSpear = true;
+					//TODO: animation on pulling the spear out from the back.
                     UIManager.instance.ShowTooltipMessage("Boobaraka is strong! He can pull it out!");
                 }
                 //If he has no spear and it is thrown - the Quest 2 and possibly other levels.
@@ -162,6 +163,7 @@ public class Player : MonoBehaviour
 					other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
 					other.gameObject.transform.SetParent(gameObject.transform);
 					PlayerManager.instance.spearsInBack.Add(other.gameObject.GetComponent<Spear>());
+					PlayerManager.instance.spearPiercedPlayer = true;
 				}
 				break;
 			case "Wizard":
