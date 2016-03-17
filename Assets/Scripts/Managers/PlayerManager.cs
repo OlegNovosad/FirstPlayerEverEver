@@ -84,14 +84,16 @@ public class PlayerManager : MonoBehaviour
 		//Case 1: Spear is in the back (TODO rework the spearsInBack)
 		if (spearsInBack.Count > 0) {
 			//TODO Pull out from the back animation
+			spearsInBack.RemoveAt (0);
 		}
         //Case 2: Player is standing on the Spear (contact) and can pull it out:
 		else if (PlayerManager.instance.player.contactsWithSpear) {
 			//TODO PullOut simple animation 
+			PlayerManager.instance.player.contactedSpear.transform.SetParent(PlayerManager.instance.player.transform);
 		}
 		hasSpear = true;
 //		Destroy (player.transform.GetChild (0).gameObject);
-		spearsInBack.RemoveAt (0);
+
 		//changing button to ThrowSpear.
 		UIManager.instance.throwSpearButton.gameObject.SetActive (true);
 		UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);

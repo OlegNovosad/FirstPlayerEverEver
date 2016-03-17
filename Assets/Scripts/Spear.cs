@@ -35,7 +35,7 @@ public class Spear : MonoBehaviour
 		{
 			if (!isThrown)
 			{
-				transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref velocity, 0.1f);
+//				transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref velocity, 0.1f); 
 			}
 			else
 			{

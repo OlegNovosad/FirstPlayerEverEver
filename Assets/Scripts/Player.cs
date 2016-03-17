@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
 	private bool phraseUsed; //FIXME: review this thing prior to release
     public bool contactsWithSpear;
+	public Spear contactedSpear;
     
     public Sprite vampire;
 	public Sprite princess;
@@ -149,15 +150,16 @@ public class Player : MonoBehaviour
 				}
 				break;
 			case "Spear":
+				//set spear to temp var on contact with spear to be able to pull it out
+			contactedSpear = other.gameObject.GetComponent<Spear>();
                 //If player is not pierced with spear - this contact is because spear is stuck somewhere.
                 if (!PlayerManager.instance.spearPiercedPlayer)
                 {
                     contactsWithSpear = true;
-					//TODO: animation on pulling the spear out from the back.
                     UIManager.instance.ShowTooltipMessage("Boobaraka is strong! He can pull it out!");
                 }
                 //If he has no spear and it is thrown - the Quest 2 and possibly other levels.
-                if (!PlayerManager.instance.hasSpear && !other.gameObject.GetComponent<Spear>().isThrown)
+                else if (!PlayerManager.instance.hasSpear && !other.gameObject.GetComponent<Spear>().isThrown)
 				{
                     PlayerManager.instance.Damage(3);
 					other.gameObject.transform.localPosition = new Vector3(other.gameObject.transform.localPosition.x, other.gameObject.transform.localPosition.y, gameObject.transform.position.z + .5f);
@@ -165,6 +167,9 @@ public class Player : MonoBehaviour
 					PlayerManager.instance.spearsInBack.Add(other.gameObject.GetComponent<Spear>());
 					PlayerManager.instance.spearPiercedPlayer = true;
 				}
+				//Set the HUD button to Pull Out state:
+					UIManager.instance.throwSpearButton.gameObject.SetActive (false);
+					UIManager.instance.pullOutSpearButton.gameObject.SetActive (true);
 				break;
 			case "Wizard":
 				SoundManager.instance.PlayOldman();
