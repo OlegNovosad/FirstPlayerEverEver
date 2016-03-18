@@ -59,6 +59,8 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+
+
 	/// <summary>
 	/// Updates the HUD in the UI system.
 	/// </summary>

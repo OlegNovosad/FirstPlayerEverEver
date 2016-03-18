@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public List<Spear> spearsInBack = new List<Spear>();
 
 	public bool hasKey;
-	public bool hasSpear = false;
+	public bool hasSpear;
 	public bool hasGarlic = false;
 
 	public Player player;
@@ -54,7 +54,7 @@ public class PlayerManager : MonoBehaviour
 		UIManager.instance.pullOutSpearButton.gameObject.SetActive (true);
 		if (hasSpear)
 		{
-			PlayerManager.instance.player.contactedSpear.isThrown = true;
+			instance.player.contactedSpear.isThrown = true;
 			hasSpear = false;
 			//TODO: throwing animation here.
 			return;
@@ -82,16 +82,16 @@ public class PlayerManager : MonoBehaviour
 		if (spearPiercedPlayer) {
 			//TODO Pull out from the back animation
 			spearsInBack.RemoveAt (0);
-            hasSpear = true;
+            instance.hasSpear = true;
         }
         //Case 2: Player is standing on the Spear (contact) and can pull it out:
 		else if (PlayerManager.instance.player.contactsWithSpear) {
             //TODO PullOut simple animation 
             PlayerManager.instance.player.contactedSpear.transform.SetParent(PlayerManager.instance.player.transform);
-            hasSpear = true;
+			instance.hasSpear = true;
         }
         //changing button to ThrowSpear.
-        if (hasSpear) { 
+		if (instance.hasSpear) { 
 		    UIManager.instance.throwSpearButton.gameObject.SetActive (true);
 		    UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);
         }

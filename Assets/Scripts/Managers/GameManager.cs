@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 	public bool isFirstLevel;
 	public bool isLastLevel;
 
+	public Spear spear;
+
 	public Constants.QuestState questState = Constants.QuestState.None;
 
 	void Awake()
@@ -48,6 +50,13 @@ public class GameManager : MonoBehaviour
         //Update the player reference in player manager on each scene on the load.
         //TODO: may need to change this to reference player on each level by putting him in the insector if there will be performance problems:
         PlayerManager.instance.player = GameObject.Find("Player").GetComponent<Player>(); 
+		//Add spear to player if he had one on the prev. level.
+		if (PlayerManager.instance.hasSpear) {
+			Spear s = Instantiate(spear, PlayerManager.instance.player.transform.position, Quaternion.identity) as Spear;
+			s.transform.SetParent(PlayerManager.instance.player.transform);
+			//set rotation for spear and put it in the hand
+			UIManager.instance.throwSpearButton.gameObject.SetActive(true);
+		}
         
         
         // TODO: Rework this part when all levels will be implemented.

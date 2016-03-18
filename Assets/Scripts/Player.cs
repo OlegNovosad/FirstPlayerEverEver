@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
 				break;
 			case "Spear":
 				//set spear to temp var on contact with spear to be able to pull it out
-			contactedSpear = other.gameObject.GetComponent<Spear>();
+				contactedSpear = other.gameObject.GetComponent<Spear>();
                 //If player is not pierced with spear - this contact is because spear is stuck somewhere.
                 if (!PlayerManager.instance.spearPiercedPlayer)
                 {
