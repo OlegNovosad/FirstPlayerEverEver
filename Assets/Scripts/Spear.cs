@@ -12,34 +12,43 @@ public class Spear : MonoBehaviour
 
 	void Start()
 	{
+		
+	}
+
+	public void CalculateDirection(){
 		player = PlayerManager.instance.player;
 
-		if (player != null && player.facingRight)
-		{
+		if (player.facingRight) {
 			direction = Vector3.right;
-		}
-		else
-		{
+		} else {
 			Vector3 theScale = transform.localScale;
-	        theScale.x *= -1;
-	        transform.localScale = theScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
 
 			direction = Vector3.left;
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update()
 	{
 		if (!GameManager.instance.isPaused)
 		{
-			if (!isThrown)
+			if (!isThrown) 
 			{
-//				transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref velocity, 0.1f); 
-			}
-			else
+//				transform.position = Vector3.SmoothDamp(transform.position, PlayerManager.instance.player.transform.position, ref velocity, 0.1f); 
+			} 
+			else 
 			{
-				transform.Translate(direction * speed * Time.deltaTime);
+				if (PlayerManager.instance.player != null) 
+				{
+					CalculateDirection ();
+					transform.Translate (direction * speed * Time.deltaTime);
+				} 
+				else 
+				{
+					Debug.Log ("player is empty! direction can't be calculated. Look into Spear and PlayerManager for details");
+				}
 			}
 		}
 	}

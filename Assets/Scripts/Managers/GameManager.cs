@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour 
 {
 	public static GameManager instance = null;
+	public Player player;
 	public GameObject bat;
 	public GameObject vampire;
 
@@ -28,8 +29,12 @@ public class GameManager : MonoBehaviour
 
 	public bool isFirstLevel;
 	public bool isLastLevel;
+	[HideInInspector]
+	public bool hasSpearOnStart;
 
 	public Spear spear;
+
+
 
 	public Constants.QuestState questState = Constants.QuestState.None;
 
@@ -48,14 +53,14 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
         //Update the player reference in player manager on each scene on the load.
-        //TODO: may need to change this to reference player on each level by putting him in the insector if there will be performance problems:
-        PlayerManager.instance.player = GameObject.Find("Player").GetComponent<Player>(); 
+		PlayerManager.instance.player = player;
 		//Add spear to player if he had one on the prev. level.
 		if (PlayerManager.instance.hasSpear) {
 			Spear s = Instantiate(spear, PlayerManager.instance.player.transform.position, Quaternion.identity) as Spear;
-			s.transform.SetParent(PlayerManager.instance.player.transform);
-			//set rotation for spear and put it in the hand
+			PlayerManager.instance.player.contactedSpear = s;
+			PlayerManager.instance.SetSpearPosition();
 			UIManager.instance.throwSpearButton.gameObject.SetActive(true);
+			hasSpearOnStart = true;
 		}
         
         
@@ -110,6 +115,11 @@ public class GameManager : MonoBehaviour
 	public void Restart()
 	{
 		//Load the last scene loaded, in this case Main, the only scene in the game.
+		if (hasSpearOnStart) {
+			PlayerManager.instance.hasSpear = true;
+		} else {
+			PlayerManager.instance.hasSpear = false;
+		}
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		PlayerManager.instance.playerHealths = Constants.MaxPlayerHealth;
 		UIManager.instance.healthbar.size = 1;
@@ -174,7 +184,7 @@ public class GameManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 		SoundManager.instance.PlayPlayersSingle(deathSound);
-		UIManager.instance.ShowModalDialogPanel("Having fun? No games allowed!", "Restart", true);
+		UIManager.instance.ShowModalDialogPanel("And that is how the hero dies!", "N-O-O-O-O-O-O!!!", true);
 	}
 
 	public void StartFromTheBeginning()

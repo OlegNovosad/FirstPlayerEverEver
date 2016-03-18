@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
 	public AudioClip grandpaSound;
 	public AudioClip princessSound;
 
+
+	public GameObject rightArm;
+	public GameObject leftArm;
+
 	public Sprite spikeOff;
 	public Sprite spikeOn;
 
@@ -90,13 +94,13 @@ public class Player : MonoBehaviour
 
 		if (horizontal != 0 || vertical != 0)
 		{
-			animator.SetBool("IsMoving", true);
+//			animator.SetBool("IsMoving", true);
 			Move(horizontal, vertical);
 //			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
 		}
 		else
 		{
-			animator.SetBool("IsMoving", false);
+//			animator.SetBool("IsMoving", false);
 		}
 
 		#endif
