@@ -54,6 +54,14 @@ public class GameManager : MonoBehaviour
 	{
         //Update the player reference in player manager on each scene on the load.
 		PlayerManager.instance.player = player;
+
+        // TODO: Rework this part when all levels will be implemented.
+		if (SceneManager.GetActiveScene().name == "Level4")
+		{
+			// setting the chestOpened to required id depending on the scene
+			chestOpened = 4;
+		}
+
 		//Add spear to player if he had one on the prev. level.
 		if (PlayerManager.instance.hasSpear) {
 			Spear s = Instantiate(spear, PlayerManager.instance.player.transform.position, Quaternion.identity) as Spear;
@@ -62,23 +70,7 @@ public class GameManager : MonoBehaviour
 			UIManager.instance.throwSpearButton.gameObject.SetActive(true);
 			hasSpearOnStart = true;
 		}
-        
-        
-        // TODO: Rework this part when all levels will be implemented.
-        if (SceneManager.GetActiveScene().name == "Level1") 
-		{
-			isFirstLevel = true;
-			UIManager.instance.ShowModalDialogPanel("Hello stranger are you ready to play the first game ever... ever?!", "What?", false, true);
-		}
-		else if (SceneManager.GetActiveScene().name == "Level6") 
-		{
-			isLastLevel = true;
-		} 
-		else if (SceneManager.GetActiveScene().name == "Level4")
-		{
-			// setting the chestOpened to required id depending on the scene
-			chestOpened = 4;
-		}
+
 	}
 
 	void Update()
@@ -97,7 +89,7 @@ public class GameManager : MonoBehaviour
 		SoundManager.instance.PlayPlayersSingle(intovampire);
 		vampire.GetComponent<SpriteRenderer>().enabled = true;
 		vampire.GetComponent<BoxCollider2D>().isTrigger = true;
-		UIManager.instance.ShowModalDialogPanel("You better run!!1!11!1!", "1!1!");
+//		UIManager.instance.SetModalDialogText("You better run!!1!11!1!", "1!1!");
 	}
 
 	/// <summary>
@@ -148,16 +140,16 @@ public class GameManager : MonoBehaviour
         UIManager.instance.HideSelectDialogPanel();
         switch (choice)
 		{
-			case 0:
-				PlayerManager.instance.selectedSkill.Add(Constants.Skill.ThrowSpear);
-                PlayerManager.instance.ThrowSpear();
-                UIManager.instance.DisplaySkill();
-                UIManager.instance.ShowModalDialogPanel("You are not the throwing one, but the spear you need is done!", "Next time I will make you run!");
+		case 0:
+			PlayerManager.instance.selectedSkill.Add (Constants.Skill.ThrowSpear);
+			PlayerManager.instance.ThrowSpear ();
+			UIManager.instance.DisplaySkill ();
+			UIManager.instance.ShowModalDialogPanel ();//"You are not the throwing one, but the spear you need is done!", "Next time I will make you run!");
                 break;
-			case 1:	
-				PlayerManager.instance.selectedSkill.Add(Constants.Skill.PullOutSpear);
-                UIManager.instance.DisplaySkill();
-                UIManager.instance.ShowModalDialogPanel("What a choice, without doubt. Just find spear and pull it out!", "Go away and scream out loud...");
+		case 1:	
+			PlayerManager.instance.selectedSkill.Add (Constants.Skill.PullOutSpear);
+			UIManager.instance.DisplaySkill ();
+			UIManager.instance.ShowModalDialogPanel ();//"What a choice, without doubt. Just find spear and pull it out!", "Go away and scream out loud...");
                 break;
 			default: break;
 		}
@@ -184,7 +176,7 @@ public class GameManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 		SoundManager.instance.PlayPlayersSingle(deathSound);
-		UIManager.instance.ShowModalDialogPanel("And that is how the hero dies!", "N-O-O-O-O-O-O!!!", true);
+		UIManager.instance.ShowModalDialogPanel ();//"And that is how the hero dies!", "N-O-O-O-O-O-O!!!", true);
 	}
 
 	public void StartFromTheBeginning()

@@ -62,30 +62,32 @@ public class Player : MonoBehaviour
 		{
 			return;
 		}
+	}
 
-
+	private void FixedUpdate()
+	{
 		#if UNITY_ANDROID || UNITY_IOS
 
 		if (Input.touchCount > 0)
 		{
-			Touch touch = Input.GetTouch(0);
-			if (touch.phase == TouchPhase.Moved || touch.phase ==  TouchPhase.Stationary)
-			{
-				Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+		Touch touch = Input.GetTouch(0);
+		if (touch.phase == TouchPhase.Moved || touch.phase ==  TouchPhase.Stationary)
+		{
+		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 
-	            if (touchPosition != transform.position)
-	            {
-					animator.SetBool("IsMoving", true);
-					Move(touchPosition);
-	            }
-	            else
-	            {
-					animator.SetBool("IsMoving", false);
-	            }
-            }
-        }
+		if (touchPosition != transform.position)
+		{
+		animator.SetBool("IsMoving", true);
+		Move(touchPosition);
+		}
+		else
+		{
+		animator.SetBool("IsMoving", false);
+		}
+		}
+		}
 
-	    #endif
+		#endif
 
 		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
 
@@ -94,13 +96,13 @@ public class Player : MonoBehaviour
 
 		if (horizontal != 0 || vertical != 0)
 		{
-//			animator.SetBool("IsMoving", true);
+			//			animator.SetBool("IsMoving", true);
 			Move(horizontal, vertical);
-//			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
+			//			SoundManager.instance.RandomizeSfx(moveSounds[Random.Range(0, moveSounds.Length)]);
 		}
 		else
 		{
-//			animator.SetBool("IsMoving", false);
+			//			animator.SetBool("IsMoving", false);
 		}
 
 		#endif
@@ -177,43 +179,44 @@ public class Player : MonoBehaviour
                     UIManager.instance.pullOutSpearButton.gameObject.SetActive(true);
 
 				break;
-			case "Wizard":
-				SoundManager.instance.PlayOldman();
-				if (GameManager.instance.isFirstLevel) 
-				{
-					UIManager.instance.ShowModalDialogPanel ("This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-					if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
-					{
-						GameObject.Find ("wizard").SetActive (false);
-					}
-				}
-				else if (GameManager.instance.isLastLevel)
-				{
-					UIManager.instance.ShowModalDialogPanel ("Great choice! You Won in the first game Ever!", "Aww! My wife!");
-					GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
-				}
-				else 
-				{
+		case "Wizard":
+			SoundManager.instance.PlayOldman ();
+			UIManager.instance.ShowModalDialogPanel ();
+//				if (GameManager.instance.isFirstLevel) 
+//				{
+//					UIManager.instance.ShowModalDialogPanel ();//"This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
+//					if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
+//					{
+//						GameObject.Find ("wizard").SetActive (false);
+//					}
+//				}
+//				else if (GameManager.instance.isLastLevel)
+//				{
+//					UIManager.instance.ShowModalDialogPanel ();//"Great choice! You Won in the first game Ever!", "Aww! My wife!");
+//					GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
+//				}
+//				else 
+//				{
 					switch (GameManager.instance.questState)
 					{
 						case Constants.QuestState.Done:
-							UIManager.instance.ShowModalDialogPanel ("It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
+						UIManager.instance.ShowModalDialogPanel ();//"It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
 							for (int i = 0; i < level2Walls.Length; i++) {
 								Destroy (level2Walls[i]);
 							}
 						break;
 						case Constants.QuestState.None:
 							GameManager.instance.questState = Constants.QuestState.Started;
-							UIManager.instance.ShowModalDialogPanel ("It's quest time! Collect all flowers before you die.", "Ok");
+							UIManager.instance.ShowModalDialogPanel ();//"It's quest time! Collect all flowers before you die.", "Ok");
 						break;
 						case Constants.QuestState.Started:
-							UIManager.instance.ShowModalDialogPanel ("Go do quest, you lazy boy.", "Ok");
+							UIManager.instance.ShowModalDialogPanel ();//"Go do quest, you lazy boy.", "Ok");
 						break;
 						case Constants.QuestState.InProgress:
-							UIManager.instance.ShowModalDialogPanel ("Mmm...i can smell it.", "Ok");
+							UIManager.instance.ShowModalDialogPanel ();//"Mmm...i can smell it.", "Ok");
 						break;
 					}
-				}
+				
 				break;
 			case "Phrase":
 				if (!phraseUsed)
@@ -235,7 +238,7 @@ public class Player : MonoBehaviour
 				if (PlayerManager.instance.hasKey) 
 				{
 					GameObject.Find("Lock").SetActive(false);
-					UIManager.instance.ShowModalDialogPanel("Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
+					UIManager.instance.ShowModalDialogPanel ();//"Why would anyone try to unlock a lock hanging on the stones?", "I don'no...");
 					for (int i = 0; i < level3Walls.Length; i++) 
 					{
 						Destroy (level3Walls[i]);
@@ -265,7 +268,7 @@ public class Player : MonoBehaviour
 				break;
 			case "Princess":
 				SoundManager.instance.PlayPlayersSingle (princessSound);
-				UIManager.instance.ShowModalDialogPanel ("Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
+				UIManager.instance.ShowModalDialogPanel ();//"Honey, I knew you would save me. Now face your doom MU-HA-HA-HA-HA", "What?", true);
 				GameObject.Find("princess").GetComponent<SpriteRenderer>().sprite = vampire;
 				break;
 			case "Exit":

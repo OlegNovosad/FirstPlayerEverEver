@@ -89,6 +89,7 @@ public class PlayerManager : MonoBehaviour
 			//TODO Pull out from the back animation
 			SetSpearPosition();
             instance.hasSpear = true;
+			UIManager.instance.HideTooltipMessage();
         }
         //Case 2: Player is standing on the Spear (contact) and can pull it out:
 		else if (PlayerManager.instance.player.contactsWithSpear) {
@@ -96,6 +97,7 @@ public class PlayerManager : MonoBehaviour
 			SetSpearPosition();
 			//TODO move the spear to correct position
 			instance.hasSpear = true;
+			UIManager.instance.HideTooltipMessage();
         }
         //changing button to ThrowSpear if this skill is available.
 		UIManager.instance.pullOutSpearButton.gameObject.SetActive (false);

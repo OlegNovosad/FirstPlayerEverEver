@@ -122,24 +122,41 @@ public class UIManager : MonoBehaviour
 		GameManager.instance.Pause(false);
 	}
 
-	public void ShowModalDialogPanel(string message, string buttonText, bool finishGame = false, bool firstLevel = false)
+	/// <summary>
+	/// Shows the modal dialog panel. And populates the text based on the TextManager.instance.branch
+	/// </summary>
+	public void ShowModalDialogPanel()
 	{
-		modalDialogPanel.SetActive(true);
-		modalDialogMessageText.text = message;
-		modalDialogButtonText.text = buttonText;
-
-		if (finishGame)
-		{
-			modalDialogButton.onClick.AddListener(() => GameManager.instance.Restart());
-		}
-		else
-		{
-			modalDialogButton.onClick.AddListener(() => HideModalDialogPanel(firstLevel));
-		}
-
 		GameManager.instance.Pause(true);
+		modalDialogPanel.SetActive (true);
+		TextManager.instance.PopulateModalDialogWithText ();
+
 	}
 
+
+	/// <summary>
+	/// Sets/Changes the modal dialog text.
+	/// </summary>
+	/// <param name="message">Message.</param>
+	/// <param name="answer">Answer.</param>
+	/// <param name="finishGame">If set to <c>true</c> finish game.</param>
+	/// <param name="firstLevel">If set to <c>true</c> first level.</param>
+	public void SetModalDialogText(string message, Answer answer, bool finishGame = false, bool firstLevel = false) //TODO remove extra params - need to handle these differently.
+	{
+		modalDialogButton.onClick.RemoveAllListeners();// clean up previous listeners
+		modalDialogMessageText.text = message;
+		modalDialogButtonText.text = answer.buttonText;
+		modalDialogButton.onClick.AddListener(() => answer.AnswerClick()); //may need to revisit this!
+	}
+
+	public void CleanUpAnswer()
+	{
+		
+	}
+	/// <summary>
+	/// Hides the modal dialog panel.
+	/// </summary>
+	/// <param name="firstLevel">If set to <c>true</c> first level.</param>
 	public void HideModalDialogPanel(bool firstLevel = false)
 	{
 		modalDialogButton.onClick.RemoveAllListeners();
