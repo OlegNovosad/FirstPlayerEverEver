@@ -181,42 +181,29 @@ public class Player : MonoBehaviour
 				break;
 		case "Wizard":
 			SoundManager.instance.PlayOldman ();
-			UIManager.instance.ShowModalDialogPanel ();
-//				if (GameManager.instance.isFirstLevel) 
-//				{
-//					UIManager.instance.ShowModalDialogPanel ();//"This is the first time ever. I invented it and called the game.", "Where is my wife?", false, true);
-//					if (GameObject.Find ("wizard") && GameObject.Find ("wizard").activeSelf) 
-//					{
-//						GameObject.Find ("wizard").SetActive (false);
-//					}
-//				}
-//				else if (GameManager.instance.isLastLevel)
-//				{
-//					UIManager.instance.ShowModalDialogPanel ();//"Great choice! You Won in the first game Ever!", "Aww! My wife!");
-//					GameObject.Find("wizard").GetComponent<SpriteRenderer>().sprite = princess;
-//				}
-//				else 
-//				{
-					switch (GameManager.instance.questState)
-					{
-						case Constants.QuestState.Done:
-						UIManager.instance.ShowModalDialogPanel ();//"It was smelly wasn't it? How do you think those flowers grow?", "Urgh...");
-							for (int i = 0; i < level2Walls.Length; i++) {
-								Destroy (level2Walls[i]);
-							}
-						break;
-						case Constants.QuestState.None:
-							GameManager.instance.questState = Constants.QuestState.Started;
-							UIManager.instance.ShowModalDialogPanel ();//"It's quest time! Collect all flowers before you die.", "Ok");
-						break;
-						case Constants.QuestState.Started:
-							UIManager.instance.ShowModalDialogPanel ();//"Go do quest, you lazy boy.", "Ok");
-						break;
-						case Constants.QuestState.InProgress:
-							UIManager.instance.ShowModalDialogPanel ();//"Mmm...i can smell it.", "Ok");
-						break;
-					}
-				
+			if (TextManager.instance.currentLevel == 2) 
+			{
+				switch (GameManager.instance.questState) {
+				case Constants.QuestState.Done:
+					TextManager.instance.branch = 3;
+					UIManager.instance.ShowModalDialogPanel ();
+					break;
+				case Constants.QuestState.None:
+					GameManager.instance.questState = Constants.QuestState.Started;
+					UIManager.instance.ShowModalDialogPanel ();//"It's quest time! Collect all flowers before you die.", "Ok");
+					break;
+				case Constants.QuestState.Started:
+					UIManager.instance.ShowModalDialogPanel ();
+					break;
+				case Constants.QuestState.InProgress:
+					UIManager.instance.ShowModalDialogPanel ();
+					break;
+				}
+			} 
+			else 
+			{
+				UIManager.instance.ShowModalDialogPanel ();
+			}
 				break;
 			case "Phrase":
 				if (!phraseUsed)

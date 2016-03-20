@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
-public class Answer : MonoBehaviour {
+public class Answer{
 
 	public String buttonText;
 	/// <summary>
@@ -54,6 +54,46 @@ public class Answer : MonoBehaviour {
 		case 3:
 			//close the modal dialog & launch selection pop up (skills/items etc.) (not ending level!)
 			//TODO: need to dev this for chests.
+			switch (TextManager.instance.currentLevel) 
+			{
+			case 1:
+				//nothing so far
+				break;
+			case 2:
+				
+				UIManager.instance.ShowSelectDialogPanel();
+				//TODO switch off colider from an oldman
+
+				break;
+			case 3:
+				//nothing so far
+				break;
+			case 4:
+				//the changing effects and bat stealing Boobaraka
+				break;
+			case 5:
+				//nothing so far
+				break;
+			case 6:
+				//cat attacking oldman and opening the secret passage
+				break;
+			case 7:
+				//eating lettuce and opening the secret passage
+				//switch off colider from an oldman
+				break;
+			case 8:
+				//picking a clothing.
+				//opening a secret passage
+				//switch off colider from an altar
+				break;
+			case 9:
+				break;
+			case 10:
+				break;
+			default:
+				break;
+			}
+
 			break;
 		case 4:
 			//switch the branch to B1 and close pop up
@@ -121,8 +161,10 @@ public class Answer : MonoBehaviour {
 				//nothing so far
 				break;
 			case 2:
-				//launch the pick skill dialog
 				//open the secret passage
+				for (int i = 0; i < PlayerManager.instance.player.level2Walls.Length; i++) {
+//					Destroy (PlayerManager.instance.player.level2Walls[i]);
+				}
 				//switch off colider from an oldman
 				break;
 			case 3:

@@ -16,9 +16,16 @@ public class UIManager : MonoBehaviour
 	public Text tooltipPanelText;
 	public GameObject selectDialogPanel;
 	public GameObject modalDialogPanel;
-	public Text modalDialogButtonText;
+	public Button FirstAnswerButton;
+	public Text FirstAnswerText;
+	public Button SecondAnswerButton;
+	public Text SecondAnswerText;
+	public Button ThirdAnswerButton;
+	public Text ThirdAnswerText;
+	public Button ForthAnswerButton;
+	public Text ForthAnswerText;
 	public Text modalDialogMessageText;
-	public Button modalDialogButton;
+
 
 	// Ocasional items
 	public GameObject screenOverlay;
@@ -143,26 +150,22 @@ public class UIManager : MonoBehaviour
 	/// <param name="firstLevel">If set to <c>true</c> first level.</param>
 	public void SetModalDialogText(string message, Answer answer, bool finishGame = false, bool firstLevel = false) //TODO remove extra params - need to handle these differently.
 	{
-		modalDialogButton.onClick.RemoveAllListeners();// clean up previous listeners
+		FirstAnswerButton.onClick.RemoveAllListeners();// clean up previous listeners
 		modalDialogMessageText.text = message;
-		modalDialogButtonText.text = answer.buttonText;
-		modalDialogButton.onClick.AddListener(() => answer.AnswerClick()); //may need to revisit this!
+		FirstAnswerText.text = answer.buttonText;
+		FirstAnswerButton.onClick.AddListener(() => answer.AnswerClick()); //may need to revisit this!
 	}
 
-	public void CleanUpAnswer()
-	{
-		
-	}
 	/// <summary>
 	/// Hides the modal dialog panel.
 	/// </summary>
 	/// <param name="firstLevel">If set to <c>true</c> first level.</param>
 	public void HideModalDialogPanel(bool firstLevel = false)
 	{
-		modalDialogButton.onClick.RemoveAllListeners();
+		FirstAnswerButton.onClick.RemoveAllListeners();
 		modalDialogPanel.SetActive(false);
 		modalDialogMessageText.text = "";
-		modalDialogButtonText.text = "";
+		FirstAnswerText.text = "";
 		GameManager.instance.Pause(false);
 	}
 

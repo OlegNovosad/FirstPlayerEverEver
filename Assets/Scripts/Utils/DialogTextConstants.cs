@@ -61,7 +61,7 @@ public class DialogTextConstants {
 			phrasesB1.Add ("Hello there, young stranger! Are you tough in face of danger?");
 			phrasesB1.Add ("Then play my GAME if you are clever.");
 			phrasesB1.Add ("You won't forget this experience never. As you are now the First Player Ever...");
-			phrasesB1.Add ("Ever!");
+			phrasesB1.Add ("As Boobaraka did not eat a lot of berries he was not very smart, so he got himself dragged into this \"Game\" as a First Player Ever...");
 			 
 			answersB1 = new List<Answer> ();
 			answersB1.Add (new Answer());
@@ -72,10 +72,10 @@ public class DialogTextConstants {
 			answersB1[1].buttonText = "...";
 			answersB1.Add (new Answer());
 			answersB1[2].action = 0;
-			answersB1[2].buttonText = "mmm...";
+			answersB1[2].buttonText = "Whatever";
 			answersB1.Add (new Answer());
 			answersB1[3].action = 1;
-			answersB1[3].buttonText = "As Boobaraka did not eat a lot of berries he was not very smart, so he got himself dragged into this \"Game\" as a First Player Ever...mmm...Ever";
+			answersB1[3].buttonText = "mmm...Ever";
 			break;
 			#endregion
 			#region Lvl2
@@ -130,8 +130,27 @@ public class DialogTextConstants {
 			answersB3[0].action = 0;
 			answersB3[0].buttonText = "Did you bring a wife to me?";
 			answersB3.Add (new Answer());
-			answersB3[1].action = 99;
+			answersB3[1].action = 3;
 			answersB3[1].buttonText = "...";
+
+			//BRANCH 4
+			phrasesB4 = new List<String> ();
+			phrasesB4.Add ("You are not the throwing one, but the spear you need is done!");
+
+			answersB4 = new List<Answer> ();
+			answersB4.Add (new Answer());
+			answersB4[0].action = 99;
+			answersB4[0].buttonText = "Now make sure you can run!";
+
+			//BRANCH 5
+			phrasesB5 = new List<String> ();
+			phrasesB5.Add ("You are not the throwing one, but the spear you need is done!");
+
+			answersB5 = new List<Answer> ();
+			answersB5.Add (new Answer());
+			answersB5[0].action = 99;
+			answersB5[0].buttonText = "Now make sure you can run!";
+
 			break;
 			#endregion
 			#region Lvl3
