@@ -150,10 +150,58 @@ public class UIManager : MonoBehaviour
 	/// <param name="firstLevel">If set to <c>true</c> first level.</param>
 	public void SetModalDialogText(string message, Answer answer, bool finishGame = false, bool firstLevel = false) //TODO remove extra params - need to handle these differently.
 	{
+		HideExtraAnswers();
 		FirstAnswerButton.onClick.RemoveAllListeners();// clean up previous listeners
 		modalDialogMessageText.text = message;
 		FirstAnswerText.text = answer.buttonText;
 		FirstAnswerButton.onClick.AddListener(() => answer.AnswerClick()); //may need to revisit this!
+	}
+
+	public void SetModalDialogTextMultiple(string message, Answer answer1, Answer answer2 = null, Answer answer3 = null, Answer answer4 = null) 
+	{
+		HideExtraAnswers();
+		modalDialogMessageText.text = message;
+		FirstAnswerButton.onClick.RemoveAllListeners();// clean up previous listeners
+		FirstAnswerText.text = answer1.buttonText;
+		FirstAnswerButton.onClick.AddListener(() => answer1.AnswerClick()); 
+
+		if (answer2 != null) 
+		{
+			SecondAnswerButton.onClick.RemoveAllListeners ();
+			SecondAnswerText.text = answer2.buttonText;
+			SecondAnswerButton.gameObject.SetActive (true);
+			SecondAnswerButton.onClick.AddListener (() => answer2.AnswerClick ()); 
+		}
+		if (answer3 != null) 
+		{
+			ThirdAnswerButton.onClick.RemoveAllListeners ();
+			ThirdAnswerText.text = answer3.buttonText;
+			ThirdAnswerButton.gameObject.SetActive (true);
+			ThirdAnswerButton.onClick.AddListener (() => answer3.AnswerClick ()); 
+		}
+		if (answer4 != null) 
+		{
+			ForthAnswerButton.onClick.RemoveAllListeners ();
+			ForthAnswerText.text = answer4.buttonText;
+			ForthAnswerButton.gameObject.SetActive (true);
+			ForthAnswerButton.onClick.AddListener (() => answer4.AnswerClick ()); 
+		}
+	}
+
+	public void HideExtraAnswers()
+	{
+		if (SecondAnswerButton.gameObject.activeSelf) {
+			SecondAnswerButton.onClick.RemoveAllListeners ();
+			SecondAnswerButton.gameObject.SetActive (false);
+		}
+		if (ThirdAnswerButton.gameObject.activeSelf) {
+			ThirdAnswerButton.onClick.RemoveAllListeners ();
+			ThirdAnswerButton.gameObject.SetActive (false);
+		}
+		if (ForthAnswerButton.gameObject.activeSelf) {
+			ForthAnswerButton.onClick.RemoveAllListeners ();
+			ForthAnswerButton.gameObject.SetActive (false);
+		}
 	}
 
 	/// <summary>

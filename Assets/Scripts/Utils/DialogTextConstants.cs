@@ -204,27 +204,33 @@ public class DialogTextConstants {
 			phrasesB1.Add ("And here we meet again, young lad.");
 			phrasesB1.Add ("Tell what happened, don't be mad!");
 
-			//TODO need to show multiple answers in same dialog here!!! need a way to set them based on branch/conversation.
+			//group 1
 			answersB1 = new List<Answer> ();
 			answersB1.Add (new Answer());
+			answersB1[0].isInGroup = true;
+			answersB1[0].numResponses = 2;
 			answersB1[0].action = 0;
 			answersB1[0].buttonText = "I don't like this game - it's bad.";
 			answersB1.Add (new Answer());
-			answersB1[1].action = 1;
+			answersB1[1].isInGroup = true;
+			answersB1[1].action = 4;
 			answersB1[1].buttonText = "I can't find a rhyme for that."; 
+
 			//Answers to Phrase 2 go to different branches
 			answersB1.Add (new Answer());
+			answersB1[2].isInGroup = true;
+			answersB1[2].numResponses = 4;
 			answersB1[2].action = 5; //branch 2
 			answersB1[2].buttonText = "I got bitten by a bat.";
 			answersB1.Add (new Answer());
 			answersB1[3].action = 6; //branch 3
 			answersB1[3].buttonText = "I am tired! I am sad!";
 			answersB1.Add (new Answer());
-			answersB1[3].action = 7; //branch 4
-			answersB1[3].buttonText = "Where is wife I should have met?";
+			answersB1[4].action = 7; //branch 4
+			answersB1[4].buttonText = "Where is wife I should have met?";
 			answersB1.Add (new Answer());
-			answersB1[3].action = 8; //branch 5
-			answersB1[3].buttonText = "Looks like soon you will be dead.";
+			answersB1[5].action = 8; //branch 5
+			answersB1[5].buttonText = "Looks like soon you will be dead.";
 
 			//BRANCH 2
 			phrasesB2 = new List<String> ();
@@ -249,9 +255,12 @@ public class DialogTextConstants {
 			answersB2[3].buttonText = "How they eat to not get fat?";
 			//two answer group
 			answersB2.Add (new Answer());
+			answersB2[4].isInGroup = true;
+			answersB2[4].numResponses = 2;
 			answersB2[4].action = 9;//branch 2_1
 			answersB2[4].buttonText = "Sounds like it is a threat!"; 
 			answersB2.Add (new Answer());
+			answersB2[5].isInGroup = true;
 			answersB2[5].action = 10;//branch 2_2
 			answersB2[5].buttonText = "I was hurt and almost dead."; 
 
@@ -300,9 +309,12 @@ public class DialogTextConstants {
 
 			answersB4 = new List<Answer> ();
 			answersB4.Add (new Answer());
+			answersB4[0].isInGroup = true;
+			answersB4[0].numResponses = 2;
 			answersB4[0].action = 11;
 			answersB4[0].buttonText = "I wonder if she'd like a pet.";//GOES TO 4_1
 			answersB4.Add (new Answer());
+			answersB4[1].isInGroup = true;
 			answersB4[1].action = 12;
 			answersB4[1].buttonText = "I want something now I meant?";//GOES TO 4_2
 

@@ -27,6 +27,8 @@ public class Answer{
 	/// 100 - death - restart;
 	/// </summary>
 	public int action;
+	public bool isInGroup = false;
+	public int numResponses;
 
 
 	/// <summary>
@@ -37,17 +39,20 @@ public class Answer{
 		{
 		case 0:
 			//show next text and button
+			TextManager.instance.answerIndex++;
 			TextManager.instance.textIndex++;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 1:
 			//close the modal dialog & switch the branch to next; 
 			TextManager.instance.branch++;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			UIManager.instance.HideModalDialogPanel();
 			break;
 		case 2:
 			//close the modal dialog & don't switch branch - reset index to the beginning of the branch; 
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			UIManager.instance.HideModalDialogPanel();
 			break;
@@ -60,10 +65,9 @@ public class Answer{
 				//nothing so far
 				break;
 			case 2:
-				
-				UIManager.instance.ShowSelectDialogPanel();
+				UIManager.instance.HideModalDialogPanel();
 				//TODO switch off colider from an oldman
-
+				UIManager.instance.ShowSelectDialogPanel();
 				break;
 			case 3:
 				//nothing so far
@@ -99,54 +103,63 @@ public class Answer{
 			//switch the branch to B1 and close pop up
 			//multiple handlers for level 6 in order to switch rooms 
 			TextManager.instance.branch = 1;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			UIManager.instance.HideModalDialogPanel();
 			break;
 		case 5:
 			//switch the branch to B2 - don't close pop up //????
 			TextManager.instance.branch = 2;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 6:
 			//switch the branch to B3 - don't close pop up
 			TextManager.instance.branch = 3;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 7:
 			//switch the branch to B4 - don't close pop up
 			TextManager.instance.branch = 4;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 8:
 			//switch the branch to B5 - don't close pop up
 			TextManager.instance.branch = 5;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 9:
 			//switch the branch to B2_1 - don't close pop up
 			TextManager.instance.branch = 21;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 10:
 			//switch the branch to B2_2 - don't close pop up
 			TextManager.instance.branch = 22;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 11:
 			//switch the branch to B4_1 - don't close pop up
 			TextManager.instance.branch = 41;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
 		case 12:
 			//switch the branch to B4_2 - don't close pop up
 			TextManager.instance.branch = 42;
+			TextManager.instance.answerIndex = 0;
 			TextManager.instance.textIndex = 0;
 			TextManager.instance.PopulateModalDialogWithText ();
 			break;
