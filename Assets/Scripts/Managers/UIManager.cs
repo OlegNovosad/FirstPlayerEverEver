@@ -6,15 +6,20 @@ public class UIManager : MonoBehaviour
 {
 	public static UIManager instance = null;
 
+    //Healthbar
 	public Scrollbar healthbar;
 	public Text healthAmount;
 
+    //ButtonsHUD
 	public Button throwSpearButton;
 	public Button pullOutSpearButton;
 
+    //Tooltip
 	public GameObject tooltipPanel;
 	public Text tooltipPanelText;
+    //SelectSmtPanel
 	public GameObject selectDialogPanel;
+    //ModalDialogPanel
 	public GameObject modalDialogPanel;
 	public Button FirstAnswerButton;
 	public Text FirstAnswerText;
@@ -26,11 +31,16 @@ public class UIManager : MonoBehaviour
 	public Text ForthAnswerText;
 	public Text modalDialogMessageText;
 
+    //HUD counters
+    public Text mushroomCount;
+    
+    //Quest item handler
+    public Image QuestItem;
+    public Text QuestItemsNum;
 
-	// Ocasional items
-	public GameObject screenOverlay;
+    //Screen Overlay
+    public GameObject screenOverlay;
 
-	public Image questHUD;
 
 
 	void Awake()

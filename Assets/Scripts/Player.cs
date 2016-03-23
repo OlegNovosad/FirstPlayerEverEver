@@ -66,7 +66,13 @@ public class Player : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		#if UNITY_ANDROID || UNITY_IOS
+        //pausing game (exiting from the FixedUpdate)
+        if (GameManager.instance.isPaused)
+        {
+            return;
+        }
+        
+        #if UNITY_ANDROID || UNITY_IOS
 
 		if (Input.touchCount > 0)
 		{
@@ -87,11 +93,11 @@ public class Player : MonoBehaviour
 		}
 		}
 
-		#endif
+#endif
 
-		#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX|| UNITY_WEBPLAYER
+#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_WEBPLAYER
 
-		horizontal = Input.GetAxisRaw ("Horizontal");
+        horizontal = Input.GetAxisRaw ("Horizontal");
 		vertical = Input.GetAxisRaw ("Vertical");
 
 		if (horizontal != 0 || vertical != 0)
